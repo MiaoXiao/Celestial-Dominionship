@@ -7,7 +7,7 @@ public class SpecialBody : CelestialBody {
 
     //Information of the SpecialBody
     [SerializeField]
-    Special SpecialRef;
+    private Special SpecialRef;
 
     private void Awake()
     {

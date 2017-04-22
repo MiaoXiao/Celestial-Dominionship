@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlanetBody : CelestialBody {
+    [SerializeField]
+    private Planet PlanetRef;
 
     Player Owner;
-    Planet PlanetRef;
+
+
     List<Special> Death;
     List<Special> Hit;
     List<Special> Tick;

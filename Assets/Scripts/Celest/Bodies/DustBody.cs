@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DustBody : RankedBody {
 
-    Dust DustRef;
+    [SerializeField]
+    private Dust DustRef;
+
     private void Awake()
     {
         CelestRef = DustRef;

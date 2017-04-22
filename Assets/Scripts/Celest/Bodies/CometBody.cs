@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CometBody : MeteorBody {
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private Comet CometRef;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

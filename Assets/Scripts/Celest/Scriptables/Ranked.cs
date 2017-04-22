@@ -5,5 +5,5 @@ using UnityEngine;
 public class Ranked : Celest {
 
     [SerializeField]
-    protected int tier;
+    public int tier;
 }

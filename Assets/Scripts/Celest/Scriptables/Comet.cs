@@ -6,6 +6,6 @@ using UnityEngine;
 public class Comet : Meteor {
 
     [SerializeField]
-    protected float distance;
+    public float distance;
 
 }

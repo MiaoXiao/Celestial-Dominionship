@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class CelestialBody : MonoBehaviour {
 
-	protected Celest CelestRef;
-
     public abstract void Play();
 
     public abstract void OnHit();

@@ -6,5 +6,5 @@ using UnityEngine;
 public class Dust : Ranked {
 
     [SerializeField]
-    protected int value;
+    public int value;
 }

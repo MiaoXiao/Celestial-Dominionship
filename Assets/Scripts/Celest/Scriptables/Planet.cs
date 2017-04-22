@@ -6,9 +6,9 @@ using UnityEngine;
 public class Planet : Celest {
 
     [SerializeField]
-    protected List<Special> PassiveEffects; // LIST OF SPECIALS AKA EFFECTS
+    public List<Special> PassiveEffects; // LIST OF SPECIALS AKA EFFECTS
     [SerializeField]
-    protected int health; // HEALTH
+    public int health; // HEALTH
     [SerializeField]
-    protected float distance; // DISTANCE FROM SUN
+    public float distance; // DISTANCE FROM SUN
 }

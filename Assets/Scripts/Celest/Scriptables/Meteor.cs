@@ -5,9 +5,9 @@ using UnityEngine;
 public class Meteor : Ranked
 {
     [SerializeField]
-    protected int damage;
+    public int damage;
     [SerializeField]
-    protected int health;
+    public int health;
     [SerializeField]
-    protected int radius;
+    public int radius;
 }

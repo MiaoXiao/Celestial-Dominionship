@@ -6,8 +6,8 @@ using UnityEngine;
 public abstract class Celest : ScriptableObject{
 
     [SerializeField]
-    protected int cost; // PRICE COST
+    public int cost; // PRICE COST
     [SerializeField]
-    protected object model; // MODEL LOCATION, CURRENTLY OBJECT UNTIL REPLACED WITH CURRENT SHIT
+    public Mesh model; // MODEL LOCATION, CURRENTLY OBJECT UNTIL REPLACED WITH CURRENT SHIT
     
 }

@@ -6,10 +6,12 @@ using UnityEngine;
 public class SpecialBody : CelestialBody {
 
     Effect eff;
+    [SerializeField]
+    Special SpecialRef;
 
     private void Awake()
     {
-        CelestRef = Instantiate<Special>(CelestRef);
+        SpecialRef = Instantiate<Special>(SpecialRef);
     }
 
     public override void Display()
@@ -24,10 +26,24 @@ public class SpecialBody : CelestialBody {
 
     public override void Play()
     {
-        eff = CelestRef.GetComponent<Special>().currentEffect;
+        eff = SpecialRef.currentEffect;
         switch (eff)
         {
-            case eff == "-Dust":
+            case Effect.Dust:
+                break;
+            case Effect.CardDraw:
+                break;
+            case Effect.Buys:
+                break;
+            case Effect.GenerateMeteor:
+                break;
+            case Effect.RotateGrid:
+                break;
+            case Effect.StarHealth:
+                break;
+            case Effect.Trash:
+                break;
+            default:
                 break;
         }
     }

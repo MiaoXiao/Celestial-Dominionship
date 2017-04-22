@@ -25,20 +25,28 @@ public class GameManager : Singleton<GameManager>
     private Player PlayerTwo;
 
     public Player CurrentPlayer { get; private set; }
-
+    public Player OppositePlayer { get; private set; }
     private GameObject UITabReference;
 
     private void Awake()
     {
         CurrentPlayer = PlayerOne;
+        OppositePlayer = PlayerTwo;
     }
 
     public void SwitchTurn()
     {
         if (CurrentPlayer == PlayerOne)
+        {
             CurrentPlayer = PlayerTwo;
+            OppositePlayer = PlayerOne;
+        }
         else
+        {
             CurrentPlayer = PlayerOne;
+            OppositePlayer = PlayerTwo;
+        }
+
     }
 
 

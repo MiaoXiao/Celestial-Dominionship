@@ -2,11 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CelestialBody : MonoBehaviour {
+public class CelestialBody : MonoBehaviour {
+
+    protected Celest CelestRef;
+
     //When the card is played
-    public abstract void Play();
+    public virtual void Play()
+    {
+
+    }
     //When the object is hit on the grid
-    public abstract void OnHit();
+    public virtual void OnHit()
+    {
+
+    }
     //How to display the object
-    public abstract void Display();
+    public virtual void Display()
+    {
+
+    }
+    public void Buy()
+    {
+        GameManager.Instance.CurrentPlayer.Dust -= CelestRef.worth;
+        GameManager.Instance.CurrentPlayer.buysAvailible--;
+        //GameManager.Instance.CurrentPlayer.AddDiscard
+    }
 }

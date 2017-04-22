@@ -23,10 +23,12 @@ public class Activate : Singleton<Activate> {
         switch (eff)
         {
             case Effect.Dust:
+                Dust(effect.value);
                 break;
             case Effect.CardDraw:
                 break;
             case Effect.Buys:
+                Buys(effect.value);
                 break;
             case Effect.GenerateMeteor:
                 break;
@@ -44,5 +46,10 @@ public class Activate : Singleton<Activate> {
     public void Dust(int val)
     {
         CurrentPlayer.Dust += val;
+    }
+
+    public void Buys(int val)
+    {
+        CurrentPlayer.buysAvailible += val;
     }
 }

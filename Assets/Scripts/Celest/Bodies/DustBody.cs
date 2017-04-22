@@ -5,6 +5,10 @@ using UnityEngine;
 public class DustBody : RankedBody {
 
     Dust DustRef;
+    private void Awake()
+    {
+        CelestRef = DustRef;
+    }
 
     public override void Display()
     {

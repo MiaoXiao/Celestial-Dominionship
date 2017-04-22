@@ -12,6 +12,7 @@ public class SpecialBody : CelestialBody {
     private void Awake()
     {
         SpecialRef = Instantiate<Special>(SpecialRef);
+        CelestRef = SpecialRef;
     }
 
     public override void Display()

@@ -1,2 +1,0 @@
-# Celestial-Dominionship
-Dominion + Battleship = ?

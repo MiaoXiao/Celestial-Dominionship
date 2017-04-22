@@ -41,6 +41,7 @@ public class Grid : MonoBehaviour
     private Vector3 Min;
     private Vector3 Max;
 
+
     /// <summary>
     /// Create grid layout
     /// </summary>

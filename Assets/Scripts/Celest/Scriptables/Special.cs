@@ -15,8 +15,10 @@ public class Special : Celest {
     public SType currentType; // WHAT TRIGGERS THE EFFECT
     public bool affectedPlayer;
 
+    public string Description = "Special Description";
+
     public override string GetDescription()
     {
-        return "Special description";
+        return "Description";
     }
 }

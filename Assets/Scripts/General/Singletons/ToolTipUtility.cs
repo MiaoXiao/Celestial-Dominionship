@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ToolTipUtility : Singleton<ToolTipUtility>
 {
@@ -55,6 +56,38 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     {
         AllTooltips[tooltip_name].SetActive(false);
         LastToolTipPosition = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Show tooltip and pass in information
+    /// </summary>
+    public void ShowToolTip(Celest data)
+    {
+        Text[] list = AllTooltips["Celest"].transform.GetComponentsInChildren<Text>();
+
+        foreach (Text element in list)
+        {
+            switch (element.gameObject.name)
+            {
+                case "Title":
+                    element.text = data.name;
+                    break;
+                case "Type":
+                    element.text = data.GetType().ToString();
+                    break;
+                case "Description":
+                    element.text = data.GetDescription();
+                    break;
+                case "Purchast Cost":
+                    element.text = data.purchaseCost.ToString();
+                    break;
+                case "Use Cost":
+                    element.text = data.playCost.ToString();
+                    break;
+            }
+        }
+
+        StartCoroutine("MoveToolTip", AllTooltips["Celest"]);
     }
 
     /// <summary>

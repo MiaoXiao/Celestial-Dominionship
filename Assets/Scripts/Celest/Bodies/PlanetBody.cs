@@ -16,7 +16,7 @@ public class PlanetBody : CelestialBody {
 
     private void Awake()
     {
-        PlanetRef = Instantiate<Planet>(PlanetRef);
+        //PlanetRef = Instantiate<Planet>(PlanetRef);
         CelestRef = PlanetRef;
     }
 

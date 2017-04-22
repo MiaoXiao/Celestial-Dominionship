@@ -7,10 +7,16 @@ using UnityEngine.EventSystems;
 public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 {
     public Vector2 Position;
+    CelestialBody Body = null;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        Debug.Log("Hit");
+        if (Body == null)
+        {
+            DragUtility.Instance.LastLocation = this.transform.position;
+            DragUtility.Instance.LastParent = this.gameObject;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -18,5 +24,9 @@ public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
         if (!DragUtility.Instance.IsDragging)
             return;
     }
-    //CelestBody Body = null;
+
+    private void OnColliderEnter(Collision collision)
+    {
+        OnPointerEnter(null);
+    }
 }

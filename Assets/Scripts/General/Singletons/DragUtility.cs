@@ -26,29 +26,46 @@ public class DragUtility : Singleton<DragUtility>
     /// </summary>
     public float MinimumDragDistance = 1000000f;
 
-    private GridContainer LastContainer = null;
+    public Vector3 LastLocation;
+    public GameObject LastParent;
+    public GameObject Temp;
+    public Plane Ground;
     private int LastIndex = -1;
 
     [HideInInspector]
     public List<GridContainer> CurrentlyActiveContainers = new List<GridContainer>();
 
+    private void Awake()
+    {
+        Temp = new GameObject();
+    }
+    /// <summary>
+    /// Dragging an object
+    /// </summary>
+    /// <param name="card"></param>
     public void StartDrag(GameObject card)
     {
 
         SoundManager.Instance.PlayAudioSource(StartDragItemSound);
 
-        LastContainer = card.transform.GetComponentInParent<GridContainer>();
+        LastLocation = card.transform.position;
         //LastContainer = card.transform.parent.parent.parent.GetComponent<GridContainer>();
-        LastIndex = LastContainer.GetCardIndex(card);
 
-        card.transform.SetParent(UIController.Instance.transform);
+       // card.transform.SetParent(UIController.Instance.transform, true);
         
     }
 
     public void Dragging(GameObject card)
     {
-        card.transform.position = Input.mousePosition;
-        
+        Ground = new Plane(Vector3.up, card.transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float rayDistance;
+        if (Ground.Raycast(ray, out rayDistance))
+        {
+            Debug.Log(rayDistance);
+            Debug.Log(ray.GetPoint(rayDistance));
+            card.transform.position = ray.GetPoint(rayDistance) + new Vector3(5,0,0);
+        }
     }
 
     public void EndDrag(GameObject card)
@@ -57,35 +74,14 @@ public class DragUtility : Singleton<DragUtility>
 
         //Current lowest distance between grid and currently held card
         float lowest_distance = MinimumDragDistance;
+        card.transform.position = LastLocation;
+        card.transform.SetParent(Temp.transform);
+        Temp.transform.SetParent(LastParent.transform, true);
+        
+    }
 
-        GridContainer container_final = null;
+    public void CancelDrag(GameObject card)
+    {
 
-        int new_index = -1;
-        //Check all active containers to detect where item should be placed
-        foreach (GridContainer container in CurrentlyActiveContainers)
-        {
-            for (int i = 0; i < container.CardMax; ++i)
-            {
-                //print("iterating " + i);
-                GameObject grid_space = container.GridDisplay.transform.GetChild(i).gameObject;
-                float curr_lowest = Vector2.Distance(grid_space.transform.position, card.transform.position);
-                if (curr_lowest < lowest_distance)
-                {
-                    lowest_distance = curr_lowest;
-                    container_final = container;
-                    new_index = i;
-                    //Debug.Log("set as new index: " + new_index);
-                }
-            }
-        }
-
-        if (new_index != -1 && container_final.CardOkay(card))
-        {
-            LastContainer.SwitchCards(LastIndex, card, container_final, new_index);   
-        }
-        else
-        {
-            LastContainer.AddCard(card, LastIndex);
-        }
     }
 }

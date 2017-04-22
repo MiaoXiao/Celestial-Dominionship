@@ -13,4 +13,5 @@ public class Special : Celest {
     public int value;
     [SerializeField]
     public SType currentType; // WHAT TRIGGERS THE EFFECT
+    public bool affectedPlayer;
 }

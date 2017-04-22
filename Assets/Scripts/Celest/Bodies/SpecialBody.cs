@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpecialBody : CelestialBody {
 
-    Effect eff;
+    //Information of the SpecialBody
     [SerializeField]
     Special SpecialRef;
 
@@ -23,10 +23,10 @@ public class SpecialBody : CelestialBody {
     {
         
     }
-
+    //When the card is played
     public override void Play()
     {
-        Activate.Instance.ActivateEffect(SpecialRef.currentEffect, SpecialRef.value);
+        Activate.Instance.ActivateEffect(SpecialRef, GameManager.Instance.CurrentPlayer);
     }
 
 

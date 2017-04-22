@@ -18,6 +18,7 @@ public class PlanetBody : CelestialBody {
 
     public override void Play()
     {
+        //Check when the effect will be used
         foreach(Special x in PlanetRef.PassiveEffects)
         {
             switch (x.currentType)
@@ -26,7 +27,7 @@ public class PlanetBody : CelestialBody {
                     Death.Add(x);
                     break;
                 case SType.OnPlay:
-                    Activate.Instance.ActivateEffect(x.currentEffect, x.value, GameManager.Instance.CurrentPlayer);
+                    Activate.Instance.ActivateEffect(x, GameManager.Instance.CurrentPlayer);
                     break;
                 case SType.OnHit:
                     Hit.Add(x);
@@ -41,19 +42,19 @@ public class PlanetBody : CelestialBody {
         }
         Owner = GameManager.Instance.CurrentPlayer;
     }
-
+    //Display the planet mesh
     public override void Display()
     {
         Instantiate<Mesh>(PlanetRef.model);
     }
-
+    //Will be called every time the planet is hit
     public override void OnHit()
     {
         if (Hit.Count > 0)
         {
             foreach (Special x in Hit)
             {
-                Activate.Instance.ActivateEffect(x.currentEffect, x.value, Owner);
+                Activate.Instance.ActivateEffect(x, Owner);
             }
         }
         PlanetRef.health--;
@@ -63,24 +64,24 @@ public class PlanetBody : CelestialBody {
         }
 
     }
-
+    //When the planet dies
     public void OnDeath()
     {
         if (Death.Count > 0)
         {
             foreach (Special x in Death)
             {
-                Activate.Instance.ActivateEffect(x.currentEffect, x.value, Owner);
+                Activate.Instance.ActivateEffect(x, Owner);
             }
         }
         Owner.passives -= this.OnTick;
     }
-
+    //Is called every turn
     public void OnTick()
     {
         foreach(Special x in Tick)
         {
-            Activate.Instance.ActivateEffect(x.currentEffect, x.value, Owner);
+            Activate.Instance.ActivateEffect(x, Owner);
         }
     }
 }

@@ -5,9 +5,21 @@ using UnityEngine;
 public class Activate : Singleton<Activate> {
     Player CurrentPlayer;
 
-    public void ActivateEffect(Effect eff, int value, Player AffectedPlayer)
+    public void ActivateEffect(Special effect, Player Owner)
     {
-        CurrentPlayer = AffectedPlayer;
+        //Check which player is going to recieve the effect
+        if (!effect.affectedPlayer)
+        {
+            if (GameManager.Instance.CurrentPlayer == Owner)
+                CurrentPlayer = GameManager.Instance.OppositePlayer;
+            else
+                CurrentPlayer = Owner;
+        }
+        else
+            CurrentPlayer = Owner;
+        Effect eff = effect.currentEffect;
+
+        //Do the effect
         switch (eff)
         {
             case Effect.Dust:

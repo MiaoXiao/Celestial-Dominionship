@@ -31,14 +31,17 @@ public class PlanetBody : CelestialBody {
                     break;
                 default:
                     break;
-            }
-
-                
+            }   
         }
     }
 
     public override void Display()
     {
         Instantiate<Mesh>(PlanetRef.model);
+    }
+
+    public override void OnHit()
+    {
+    
     }
 }

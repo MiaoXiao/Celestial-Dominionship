@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //List<Celest> CurrentHand;
-    //List<Celest> Deck;
-    //List<Celest> Discard;
+    List<Celest> CurrentHand;
+    List<Celest> Deck;
+    List<Celest> Discard;
     //Grid Field;
+
     int Dust;
     int buysAvailible;
 

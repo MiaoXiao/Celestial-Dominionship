@@ -9,7 +9,5 @@ public abstract class Celest : ScriptableObject{
     protected int cost; // PRICE COST
     [SerializeField]
     protected object model; // MODEL LOCATION, CURRENTLY OBJECT UNTIL REPLACED WITH CURRENT SHIT
-
-    public abstract void Play(); // THE PLAY FUNCTION THAT IS GOING TO BE PLAYED LIKE A FIDDLE
     
 }

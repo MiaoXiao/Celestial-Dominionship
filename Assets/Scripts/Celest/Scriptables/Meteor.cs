@@ -10,9 +10,4 @@ public class Meteor : Ranked
     protected int health;
     [SerializeField]
     protected int radius;
-
-    public override void Play()
-    {
-        // does stuff
-    }
 }

@@ -6,9 +6,4 @@ public class Ranked : Celest {
 
     [SerializeField]
     protected int tier;
-
-    public override void Play()
-    {
-        // does stuff
-    }
 }

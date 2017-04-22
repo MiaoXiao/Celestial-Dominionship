@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CelestialBody : MonoBehaviour {
 
@@ -27,4 +29,5 @@ public class CelestialBody : MonoBehaviour {
         GameManager.Instance.CurrentPlayer.buysAvailible--;
         //GameManager.Instance.CurrentPlayer.AddDiscard
     }
+
 }

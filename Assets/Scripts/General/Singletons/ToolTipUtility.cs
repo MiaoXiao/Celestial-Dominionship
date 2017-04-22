@@ -23,7 +23,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     /// <summary>
     /// How far away tooltip corner is from the mouse cursor
     /// </summary>
-    public float TooltipOffset = 45;
+    public float TooltipOffset = 20;
 
     private Vector3 LastToolTipPosition;
 
@@ -78,7 +78,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                 case "Description":
                     element.text = data.GetDescription();
                     break;
-                case "Purchast Cost":
+                case "Purchase Cost":
                     element.text = data.purchaseCost.ToString();
                     break;
                 case "Use Cost":
@@ -86,7 +86,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     break;
             }
         }
-
+        AllTooltips["Celest"].SetActive(true);
         StartCoroutine("MoveToolTip", AllTooltips["Celest"]);
     }
 

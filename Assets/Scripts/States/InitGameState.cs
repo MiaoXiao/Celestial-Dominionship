@@ -12,6 +12,6 @@ public class InitGameState : GameState
 
     public override void OnStateExit()
     {
-        throw new NotImplementedException();
+
     }
 }

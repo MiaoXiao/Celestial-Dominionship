@@ -9,10 +9,11 @@ public class Player : MonoBehaviour
     List<Celest> Discard;
     //Grid Field;
 
-    int Dust;
-    int buysAvailible;
+    public int Dust;
+    public int buysAvailible;
 
     public delegate void Passives();
+    public Passives passives;
 
     private void Display()
     {

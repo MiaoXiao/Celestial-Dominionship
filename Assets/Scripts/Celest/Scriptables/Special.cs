@@ -10,6 +10,7 @@ public class Special : Celest {
     
     [SerializeField]
     public Effect currentEffect; // EFFECT, DUH
+    public int value;
     [SerializeField]
     public SType currentType; // WHAT TRIGGERS THE EFFECT
 }

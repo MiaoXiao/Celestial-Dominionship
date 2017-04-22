@@ -26,26 +26,7 @@ public class SpecialBody : CelestialBody {
 
     public override void Play()
     {
-        eff = SpecialRef.currentEffect;
-        switch (eff)
-        {
-            case Effect.Dust:
-                break;
-            case Effect.CardDraw:
-                break;
-            case Effect.Buys:
-                break;
-            case Effect.GenerateMeteor:
-                break;
-            case Effect.RotateGrid:
-                break;
-            case Effect.StarHealth:
-                break;
-            case Effect.Trash:
-                break;
-            default:
-                break;
-        }
+        Activate.Instance.ActivateEffect(SpecialRef.currentEffect, SpecialRef.value);
     }
 
 

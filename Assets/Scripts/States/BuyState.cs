@@ -8,6 +8,7 @@ public class BuyState : GameState
     public override void OnStateEnter()
     {
         Player current_player = GameManager.Instance.CurrentPlayer;
+        current_player.EmptyHand();
     }
 
     public override void OnStateExit()

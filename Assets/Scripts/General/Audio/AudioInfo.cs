@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AudioInfo", menuName = "Audio/AudioInfo", order = 1)]
+[CreateAssetMenu(fileName = "Create AudioInfo", menuName = "Audio/Create AudioInfo", order = 1)]
 public class AudioInfo: ScriptableObject
 {
     public enum ChannelGroup { FX, UI, Voice, Music };

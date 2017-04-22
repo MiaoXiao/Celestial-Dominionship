@@ -23,7 +23,7 @@ public class CelestialBody : MonoBehaviour {
     }
     public void Buy()
     {
-        GameManager.Instance.CurrentPlayer.Dust -= CelestRef.worth;
+        GameManager.Instance.CurrentPlayer.Dust -= CelestRef.purchaseCost;
         GameManager.Instance.CurrentPlayer.buysAvailible--;
         //GameManager.Instance.CurrentPlayer.AddDiscard
     }

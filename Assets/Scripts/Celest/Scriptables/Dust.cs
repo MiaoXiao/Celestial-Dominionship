@@ -7,4 +7,9 @@ public class Dust : Ranked {
 
     [SerializeField]
     public int value;
+
+    public override string GetDescription()
+    {
+        return "Worth " + value.ToString() + " Dust";
+    }
 }

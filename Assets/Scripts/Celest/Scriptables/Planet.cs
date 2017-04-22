@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,4 +12,9 @@ public class Planet : Celest {
     public int health; // HEALTH
     [SerializeField]
     public float distance; // DISTANCE FROM SUN
+
+    public override string GetDescription()
+    {
+        return "Health " + health.ToString();
+    }
 }

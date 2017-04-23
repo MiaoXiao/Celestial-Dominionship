@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreatePlanetObject", order = 1)]
 public class Planet : Celest
 {
-    [SerializeField]
     public List<PlanetSpecial> PlanetEffects; // LIST OF SPECIALS AKA EFFECTS
 
     [SerializeField]

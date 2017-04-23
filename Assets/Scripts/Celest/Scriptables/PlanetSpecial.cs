@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlanetEffect { Dust, CardDraw, GenerateMeteor, Buys }
 public enum SType { OnTick, OnHit, OnDestroy, OnPlay, Passive }
 
-[CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreatePlanetSpecialObject", order = 2)]
+[Serializable]
 public class PlanetSpecial
 {
     [SerializeField]
@@ -36,6 +37,9 @@ public class PlanetSpecial
 
         switch (currentType)
         {
+            case SType.Passive:
+                desc += " while this Planet is active.";
+                break;
             case SType.OnDestroy:
                 desc += " when this planet is destroyed.";
                 break;

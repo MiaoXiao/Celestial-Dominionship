@@ -30,7 +30,7 @@ public class PlanetBody : CelestialBody
                     Activate.Instance.ActivatePlanetEffect(x, GameManager.Instance.CurrentPlayer);
                     break;
                 case SType.OnTick:
-                    GameManager.Instance.CurrentPlayer.passives += this.OnTick;
+                    GameManager.Instance.CurrentPlayer.perTick += this.OnTick;
                     break;
                 default:
                     break;
@@ -67,7 +67,7 @@ public class PlanetBody : CelestialBody
         }
         
         
-        owner.passives -= this.OnTick;
+        owner.perTick -= this.OnTick;
     }
 
     //Is called every turn

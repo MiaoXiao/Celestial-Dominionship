@@ -35,6 +35,7 @@ public class CometBody : MeteorBody
         {
             Mover.StartMovement(CometRef.projectileSpeed, Vector3.right);
             Fired = true;
+            StartDeathTimer(10f);
         }
     }
 

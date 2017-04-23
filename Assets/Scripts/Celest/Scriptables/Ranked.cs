@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ranked : Celest {
+public abstract class Destroyable : Celest
+{
 
-    [SerializeField]
-    public int tier;
+    //[SerializeField]
+    //public int tier;
 }

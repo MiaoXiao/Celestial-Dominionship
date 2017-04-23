@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreateDustObject", order = 3)]
-public class Dust : Ranked {
+public class Dust : Celest {
 
     [SerializeField]
     public int value;

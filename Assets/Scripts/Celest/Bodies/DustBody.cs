@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DustBody : RankedBody
+public class DustBody : CelestialBody
 {
     [SerializeField]
     private Dust DustRef;

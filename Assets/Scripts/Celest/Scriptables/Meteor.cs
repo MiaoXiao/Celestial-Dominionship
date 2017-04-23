@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Meteor : Ranked
+public abstract class Meteor : Destroyable
 {
     [SerializeField]
     public int damage = 1;

@@ -31,9 +31,10 @@ public class AsteroidBody : MeteorBody
 
         if (!Mover.isActive)
         {
-            transform.position += new Vector3(0, 80f, 0);
+            transform.position += new Vector3(0, 60f, 0);
             Mover.StartMovement(AsteroidRef.projectileSpeed, Vector3.down);
             Fired = true;
+            StartDeathTimer(10f);
         }
     }
 

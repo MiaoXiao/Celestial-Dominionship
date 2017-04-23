@@ -67,6 +67,7 @@ public class DragUtility : Singleton<DragUtility>
     {
         while (dragging)
         {
+            Debug.Log("Drag");
             Dragging(card);
             yield return null;
         }
@@ -81,7 +82,7 @@ public class DragUtility : Singleton<DragUtility>
         if (Ground.Raycast(ray, out rayDistance))
         {
             Loc = ray.GetPoint(rayDistance);
-            Loc.y = 3.0f;
+            //Loc.y = 3.0f;
             card.transform.position = Loc + new Vector3(5,0,0f);
         }
     }
@@ -97,6 +98,7 @@ public class DragUtility : Singleton<DragUtility>
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();
+            LastLocation.y += 4;
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
@@ -114,7 +116,9 @@ public class DragUtility : Singleton<DragUtility>
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();
-            card.transform.position = LastParent.transform.position;
+            LastLocation = LastParent.transform.position;
+            LastLocation.y += 4;
+            card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
             LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();

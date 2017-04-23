@@ -60,11 +60,16 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
         if (curr_player.Dust < GetCelest().purchaseCost ||
             curr_player.Buys <= 0)
+            Debug.Log("Insufficient Funds");
             return;
 
         curr_player.Dust -= GetCelest().purchaseCost;
         curr_player.Buys--;
         curr_player.Discard.Add(this);
+        isLocked = true;
+
+        //Add Discard animation
+        //Move to object pooler
 
         owner = curr_player;
     }

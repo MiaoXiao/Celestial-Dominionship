@@ -12,14 +12,12 @@ public class CometBody : MeteorBody
 
     private bool Fired = false;
 
-    public override void OnHit(Collider collision)
+    public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
-        if (meteor_body == null)
-            return;
+        print("COMET ON HIT");
 
-        MeteorRef.health--;
-        if (MeteorRef.health <= 0)
+        MeteorRef.piercing--;
+        if (MeteorRef.piercing <= -1)
             gameObject.SetActive(false);
 
     }
@@ -31,7 +29,6 @@ public class CometBody : MeteorBody
 
         if (!Mover.isActive)
         {
-            print("move");
             Mover.StartMovement(MeteorRef.projectileSpeed, Vector3.right);
             Fired = true;
         }
@@ -41,7 +38,7 @@ public class CometBody : MeteorBody
     {
         base.OnPointerDown(eventData);
 
-        if (isLocked)
+        if (eventData.button == PointerEventData.InputButton.Left && isLocked)
             Play();
     }
 

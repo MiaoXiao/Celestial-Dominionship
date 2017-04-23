@@ -15,12 +15,22 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
     public abstract void Play();
 
     //When the object is hit on the grid
-    public abstract void OnHit(Collider collision);
+    public abstract void OnHit(Collider collision, MeteorBody mmeteor_body);
 
     private void OnTriggerEnter(Collider collision)
     {
-        print("trigger enter with " + name);
-        OnHit(collision);
+        CelestialBody celestial_body = collision.gameObject.GetComponent<CelestialBody>();
+        if (celestial_body == null)
+            return;
+
+        print(name + " has trigger event with " + collision.name);
+
+        if (celestial_body is MeteorBody)
+            OnHit(collision, (MeteorBody)celestial_body);
+        else
+            OnHit(collision, null);
+
+
     }
 
     /// <summary>

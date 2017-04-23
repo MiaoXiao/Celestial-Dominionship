@@ -7,7 +7,7 @@ public class Asteriod : Meteor
 {
     public override string GetDescription()
     {
-        int pierce = health - 1;
+        int pierce = piercing - 1;
         return "Target a location of radius " + radius + " and inflict " + damage + " damage.";
     }
 }

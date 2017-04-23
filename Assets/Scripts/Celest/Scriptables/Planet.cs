@@ -9,14 +9,14 @@ public class Planet : Celest
     public List<PlanetSpecial> PlanetEffects; // LIST OF SPECIALS AKA EFFECTS
 
     [SerializeField]
-    public int health; // HEALTH
+    public int population; // HEALTH
     [SerializeField]
     public float distance; // DISTANCE FROM SUN
 
     public override string GetDescription()
     {
         string desc = "";
-        desc += "Health " + health.ToString();
+        desc += "Population: " + population.ToString() + " billion";
         if (PlanetEffects.Count != 0)
         {
             desc += "\n Per Turn: ";

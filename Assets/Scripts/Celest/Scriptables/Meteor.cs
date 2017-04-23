@@ -7,7 +7,7 @@ public abstract class Meteor : Ranked
     [SerializeField]
     public int damage;
     [SerializeField]
-    public int health;
+    public int piercing = 0;
     [SerializeField]
     public int radius;
     public float projectileSpeed = 30f;

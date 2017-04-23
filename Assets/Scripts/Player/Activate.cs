@@ -74,11 +74,13 @@ public class Activate : Singleton<Activate>
 
     public void Dust(int val)
     {
-        CurrentPlayer.Dust += val;
+        if (CurrentPlayer != null)
+            CurrentPlayer.Dust += val;
     }
 
     public void Buys(int val)
     {
-        CurrentPlayer.buysAvailible += val;
+        if (CurrentPlayer != null)
+            CurrentPlayer.buysAvailible += val;
     }
 }

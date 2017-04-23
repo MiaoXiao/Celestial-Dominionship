@@ -41,11 +41,9 @@ public class PlanetBody : CelestialBody
     }
 
     //Will be called every time the planet is hit
-    public override void OnHit(Collider collision)
+    public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
-        if (meteor_body == null)
-            return;
+        print("PLANET HIT");
 
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
@@ -53,8 +51,8 @@ public class PlanetBody : CelestialBody
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
-        PlanetRef.health -= meteor_body.MeteorRef.damage;
-        if(PlanetRef.health <= 0)
+        PlanetRef.population -= meteor_body.MeteorRef.damage;
+        if(PlanetRef.population <= 0)
         {
             OnDeath();
         }
@@ -63,15 +61,16 @@ public class PlanetBody : CelestialBody
     //When the planet dies
     public void OnDeath()
     {
-        
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
             if (x.currentType == PSType.OnDestroy)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
-        
-        owner.perTick -= this.OnTick;
+        if (owner != null)
+            owner.perTick -= this.OnTick;
+
+        gameObject.SetActive(false);
     }
 
     //Is called every turn

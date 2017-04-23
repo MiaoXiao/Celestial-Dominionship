@@ -22,11 +22,9 @@ public class DustBody : RankedBody
 
 
     //When the object is hit on the grid
-    public override void OnHit(Collider collision)
+    public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
-        if (meteor_body == null)
-            return;
+
     }
 
     public override void Play()

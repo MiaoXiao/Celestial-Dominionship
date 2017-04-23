@@ -21,11 +21,9 @@ public class SpecialBody : CelestialBody
         SpecialRef.name = SpecialRef.name.Replace("(Clone)", "").Trim();
     }
 
-    public override void OnHit(Collider collision)
+    public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
-        if (meteor_body == null)
-            return;
+
     }
 
     //When the card is played

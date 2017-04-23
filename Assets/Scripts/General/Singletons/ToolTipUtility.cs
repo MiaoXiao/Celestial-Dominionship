@@ -87,7 +87,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     break;
                 case "Usage":
                     if (celest_body is CometBody && celest_body.isLocked)
-                        element.text = "[Left Click to Launch]";
+                        element.text = "[Left Click to launch projectile]";
                     else if (celest_body.owner == null)
                         element.text = "[Left Click to Purchase]";
                     else if (celest_body is CometBody || celest_body is PlanetBody)

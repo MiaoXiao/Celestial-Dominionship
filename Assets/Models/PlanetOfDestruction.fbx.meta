@@ -1,37 +1,41 @@
 fileFormatVersion: 2
-guid: d6c047e2f1e4dcd40b5ad14835a2a3a7
-timeCreated: 1492930070
+guid: d90d30fc155707d46bacab418b0979be
+timeCreated: 1492922086
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: pCube1
-    100004: pCube2
-    100006: pCube3
-    100008: pCube4
-    100010: pCube5
-    400000: //RootNode
-    400002: pCube1
-    400004: pCube2
-    400006: pCube3
-    400008: pCube4
-    400010: pCube5
-    2300000: pCube1
-    2300002: pCube2
-    2300004: pCube3
-    2300006: pCube4
-    2300008: pCube5
-    3300000: pCube1
-    3300002: pCube2
-    3300004: pCube3
-    3300006: pCube4
-    3300008: pCube5
-    4300000: pCube1
-    4300002: pCube2
-    4300004: pCube3
-    4300006: pCube4
-    4300008: pCube5
+    100000: back
+    100002: left
+    100004: pCylinder1
+    100006: pCylinder2
+    100008: planetBody2
+    100010: //RootNode
+    100012: pPipe1
+    100014: sep_planetBody
+    400000: back
+    400002: left
+    400004: pCylinder1
+    400006: pCylinder2
+    400008: planetBody2
+    400010: //RootNode
+    400012: pPipe1
+    400014: sep_planetBody
+    2300000: pCylinder1
+    2300002: pCylinder2
+    2300004: planetBody2
+    2300006: pPipe1
+    2300008: sep_planetBody
+    3300000: pCylinder1
+    3300002: pCylinder2
+    3300004: planetBody2
+    3300006: pPipe1
+    3300008: sep_planetBody
+    4300000: sep_planetBody
+    4300002: pCylinder2
+    4300004: pCylinder1
+    4300006: pPipe1
+    4300008: planetBody2
     7400000: Take 001
     9500000: //RootNode
   materials:

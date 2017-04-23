@@ -5,9 +5,9 @@ using UnityEngine;
 public class RotateScript : MonoBehaviour
 {
 
-    public float speed;
+    public float speed = 15f;
     public bool isActive;
-    public Vector3 direction;
+    public Vector3 direction = new Vector3(0, 1, 0);
 
     // Use this for initialization
     void Start()

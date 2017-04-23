@@ -5,5 +5,8 @@ using UnityEngine;
 
 public abstract class MeteorBody: RankedBody
 {
-    public Meteor MeteorRef;
+    public Meteor GetMeteor()
+    {
+        return (Meteor)GetCelest();
+    }
 }

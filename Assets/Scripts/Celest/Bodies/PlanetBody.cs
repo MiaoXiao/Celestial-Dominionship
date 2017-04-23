@@ -51,7 +51,7 @@ public class PlanetBody : CelestialBody
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
-        PlanetRef.population -= meteor_body.MeteorRef.damage;
+        PlanetRef.population -= meteor_body.GetMeteor().damage;
         if(PlanetRef.population <= 0)
         {
             OnDeath();

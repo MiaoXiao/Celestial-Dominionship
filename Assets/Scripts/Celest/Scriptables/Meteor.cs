@@ -5,10 +5,8 @@ using UnityEngine;
 public abstract class Meteor : Ranked
 {
     [SerializeField]
-    public int damage;
+    public int damage = 1;
     [SerializeField]
-    public int piercing = 0;
-    [SerializeField]
-    public int radius;
+    public int radius = 0;
     public float projectileSpeed = 30f;
 }

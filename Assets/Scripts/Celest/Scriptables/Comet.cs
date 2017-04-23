@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreateCometObject", order = 4)]
 public class Comet : Meteor
 {
+    public int piercing = 0;
+
     public override string GetDescription()
     {
         return "Launches a projecile that inflicts " + damage + " damage.\n Impact Radius: " + radius + " tile(s).\n Pierces " + piercing + " objects.";

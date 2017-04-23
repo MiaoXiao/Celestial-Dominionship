@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveScript : MonoBehaviour
 {
-    [SerializeField]
     private float Speed;
 
     public bool isActive { get; set; }
@@ -26,7 +25,7 @@ public class MoveScript : MonoBehaviour
         StartCoroutine("WaitandMove");
     }
 
-    IEnumerator WaitandMove()
+    private IEnumerator WaitandMove()
     {
         while (isActive)
         {

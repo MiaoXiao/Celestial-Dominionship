@@ -4,25 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CometBody : MeteorBody
+public class AsteroidBody : MeteorBody
 {
     [SerializeField]
-    private Comet CometRef = null;
+    private Asteroid AsteroidRef;
 
     private MoveScript Mover = null;
 
-    private bool Primed = false;
-
     private bool Fired = false;
-
 
     public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        print("COMET ON HIT");
+        print("ASTEROID ON HIT");
 
-        CometRef.piercing--;
-        if (CometRef.piercing <= -1)
-            gameObject.SetActive(false);
+        //Damage all tiles within radius
+
+        gameObject.SetActive(false);
+
 
     }
 
@@ -33,7 +31,8 @@ public class CometBody : MeteorBody
 
         if (!Mover.isActive)
         {
-            Mover.StartMovement(CometRef.projectileSpeed, Vector3.right);
+            transform.position += new Vector3(0, 80f, 0);
+            Mover.StartMovement(AsteroidRef.projectileSpeed, Vector3.down);
             Fired = true;
         }
     }
@@ -51,14 +50,14 @@ public class CometBody : MeteorBody
 
     public override Celest GetCelest()
     {
-        return CometRef;
+        return AsteroidRef;
     }
 
     // Use this for initialization
     void OnEnable ()
     {
-        CometRef = Instantiate(CometRef);
-        CometRef.name = CometRef.name.Replace("(Clone)", "").Trim();
+        AsteroidRef = Instantiate(AsteroidRef);
+        AsteroidRef.name = AsteroidRef.name.Replace("(Clone)", "").Trim();
 
         Mover = GetComponent<MoveScript>();
         if (Mover == null)

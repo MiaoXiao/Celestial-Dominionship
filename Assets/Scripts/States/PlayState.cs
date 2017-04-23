@@ -9,7 +9,6 @@ public class PlayState : GameState
     {
         GameManager.Instance.currState = States.Play;
         Player current_player = GameManager.Instance.CurrentPlayer;
-        current_player.Play();
     }
 
     public override void OnStateExit()

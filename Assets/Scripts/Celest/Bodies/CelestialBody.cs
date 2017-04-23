@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool isLocked = true;
+    public bool isLocked = false;
     public Player owner = null;
 
     public abstract Celest GetCelest();
@@ -75,14 +75,11 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentPlayer.BuyEnable)
-        {
             //Debug.Log("Hit");
             if (owner == null)
             {
                 Buy();
             }
-        }
         else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
             DragUtility.Instance.StartDrag(this.gameObject);
     }

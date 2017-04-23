@@ -72,7 +72,7 @@ public class Grid : MonoBehaviour
 
             Vector3[] line = new Vector3[2];
             line[0] = new Vector3(Min.x, 0, Min.z + current_interval_x);
-            line[1] = new Vector3(Max.x - Mathf.Clamp(IntervalX * (Dimensions.y - Dimensions.x), 0, IntervalX * Dimensions.y), 0, Min.z + current_interval_x);
+            line[1] = new Vector3(Min.x + IntervalX * dimensions.x, 0, Min.z + current_interval_x);
             line_obj.GetComponent<LineRenderer>().SetPositions(line);
             current_interval_x += IntervalX;
         }
@@ -86,7 +86,7 @@ public class Grid : MonoBehaviour
 
             Vector3[] line = new Vector3[2];
             line[0] = new Vector3(Min.x + current_interval_y, 0, Min.z);
-            line[1] = new Vector3(Min.x + current_interval_y, 0, Max.z - Mathf.Clamp(IntervalY * (Dimensions.x - Dimensions.y), 0, IntervalY * Dimensions.x));
+            line[1] = new Vector3(Min.x + current_interval_y, 0, Min.z + dimensions.y * IntervalY);
             line_obj.GetComponent<LineRenderer>().SetPositions(line);
             current_interval_y += IntervalY;
         }

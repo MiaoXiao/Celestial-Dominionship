@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Effect { Dust, StarHealth, CardDraw, RotateGrid, Buys, Trash }
+public enum Effect { Dust, CardDraw, Buys, Trash }
 
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreateSpecialObject", order = 2)]
 public class Special : Celest
 {
-    
     [SerializeField]
     public Effect currentEffect; // EFFECT, DUH
     public int value;
@@ -27,10 +26,6 @@ public class Special : Celest
                 break;
             case Effect.CardDraw:
                 desc += "Gain " + value + " extra Warps for this turn only.";           
-                break;
-            case Effect.RotateGrid:
-                break;
-            case Effect.StarHealth:
                 break;
             case Effect.Trash:
                 desc += "Destroy " + value + " Celestrals in your Home or in your Galaxy.";

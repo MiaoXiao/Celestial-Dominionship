@@ -15,14 +15,62 @@ public class Planet : Celest
 
     public override string GetDescription()
     {
+        bool hasPassive = false;
+        bool hasTick = false;
+        bool hasHit = false;
+        bool hasDestroyed = false;
+        foreach (PlanetSpecial special in PlanetEffects)
+        {
+            if (special.currentType == PSType.Passive)
+                hasPassive = true;
+            else if (special.currentType == PSType.OnTick)
+                hasTick = true;
+            else if (special.currentType == PSType.OnHit)
+                hasHit = true;
+            else if (special.currentType == PSType.OnDestroy)
+                hasDestroyed = true;
+        }
+
         string desc = "";
         desc += "Population: " + population.ToString() + " billion";
-        if (PlanetEffects.Count != 0)
+
+        if (hasPassive)
+        {
+            desc += "\n Passively: ";
+            foreach (PlanetSpecial special in PlanetEffects)
+            {
+                if (special.currentType == PSType.Passive)
+                    desc += "\n" + special.GetDescription();
+            }
+        }
+
+        if (hasTick)
         {
             desc += "\n Per Turn: ";
-            foreach(PlanetSpecial special in PlanetEffects)
+            foreach (PlanetSpecial special in PlanetEffects)
             {
-                desc += "\n" + special.GetDescription();
+                if (special.currentType == PSType.OnTick)
+                    desc += "\n" + special.GetDescription();
+            }
+        }
+
+        if (hasHit)
+        {
+            desc += "\n When damaged: ";
+            foreach (PlanetSpecial special in PlanetEffects)
+            {
+                if (special.currentType == PSType.OnHit)
+                    desc += "\n" + special.GetDescription();
+            }
+        }
+
+        if (hasDestroyed)
+        {
+            desc += "\n When destroyed: ";
+            foreach (PlanetSpecial special in PlanetEffects)
+            {
+                if (special.currentType == PSType.OnDestroy)
+                    desc += "\n" + special.GetDescription();
             }
         }
         return desc;

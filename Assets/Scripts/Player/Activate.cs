@@ -26,6 +26,7 @@ public class Activate : Singleton<Activate>
                 Dust(effect.value);
                 break;
             case PlanetEffect.CardDraw:
+                CardDraw(effect.value);
                 break;
             case PlanetEffect.Buys:
                 Buys(effect.value);
@@ -61,10 +62,6 @@ public class Activate : Singleton<Activate>
             case Effect.Dust:
                 Dust(effect.value);
                 break;
-            case Effect.RotateGrid:
-                break;
-            case Effect.StarHealth:
-                break;
             case Effect.Trash:
                 break;
             default:
@@ -76,6 +73,12 @@ public class Activate : Singleton<Activate>
     {
         if (CurrentPlayer != null)
             CurrentPlayer.Dust += val;
+    }
+
+    public void CardDraw(int val)
+    {
+        if (CurrentPlayer != null)
+            CurrentPlayer.cardDraw += val;
     }
 
     public void Buys(int val)

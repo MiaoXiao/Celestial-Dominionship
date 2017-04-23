@@ -32,6 +32,12 @@ public class PlanetBody : DestroyableBody
                 case PSType.OnTick:
                     GameManager.Instance.CurrentPlayer.perTick += this.OnTick;
                     break;
+                case PSType.OnHit:
+                    //Do nothing
+                    break;
+                case PSType.OnDestroy:
+                    //Do nothing
+                    break;
                 default:
                     break;
             }
@@ -47,7 +53,7 @@ public class PlanetBody : DestroyableBody
 
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            if (x.currentType == PSType.OnTick)
+            if (x.currentType == PSType.OnHit)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
@@ -69,6 +75,10 @@ public class PlanetBody : DestroyableBody
         
         if (owner != null)
             owner.perTick -= this.OnTick;
+
+        ToolTipUtility.Instance.HideToolTip("Celest");
+
+        //TODO: need to disable this planet's passives here
 
         gameObject.SetActive(false);
     }

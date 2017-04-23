@@ -9,9 +9,51 @@ public class Player : MonoBehaviour
     public List<CelestialBody> Discard = new List<CelestialBody>();
     //Grid Field;
 
-    public int Dust = 0;
-    public int Buys = 1;
-    public int cardDraw = 5;
+    private int _Dust = 0;
+    public int Dust
+    {
+        get
+        {
+            return _Dust;
+        }
+        set
+        {
+            if (value < 0)
+                _Dust = 0;
+            else
+                _Dust = value;
+        }
+    }
+    private int _Buys = 1;
+    public int Buys
+    {
+        get
+        {
+            return _Buys;
+        }
+        set
+        {
+            if (value < 0)
+                _Buys = 0;
+            else
+                _Buys = value;
+        }
+    }
+    private int _cardDraw = 5;
+    public int cardDraw
+    {
+        get
+        {
+            return _cardDraw;
+        }
+        set
+        {
+            if (value < 0)
+                _cardDraw = 0;
+            else
+                _cardDraw = value;
+        }
+    }
 
     public delegate void Passives();
     public Passives perTick;

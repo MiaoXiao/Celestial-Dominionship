@@ -29,7 +29,6 @@ public class MoveScript : MonoBehaviour {
     {
         while (isActive)
         {
-            Debug.Log("hi");
             gameTransform.Translate(speed * direction * Time.deltaTime);
             yield return null;
         }

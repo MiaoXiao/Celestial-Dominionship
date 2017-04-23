@@ -31,7 +31,6 @@ public class RotateScript : MonoBehaviour
     {
         while (isActive)
         {
-            Debug.Log("hi");
             gameTransform.Rotate(speed * direction * Time.deltaTime);
             yield return null;
         }

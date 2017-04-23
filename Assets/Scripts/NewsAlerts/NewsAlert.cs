@@ -11,11 +11,19 @@ public class NewsAlert : MonoBehaviour {
     [SerializeField]
     private List<string> StartPhrases;
 
-    [SerializeField]
-    Text textbox;
+    public Text textbox;
+
+    public Vector3 startLocation;
+    public int speed;
 
     [SerializeField]
     float time = 0;
+
+    void Start()
+    {
+        startLocation = transform.TransformPoint(textbox.transform.localPosition);
+        StartCoroutine("WaitAndMove");
+    }
 
     void Update()
     {
@@ -29,6 +37,8 @@ public class NewsAlert : MonoBehaviour {
 
     public void CallNewsAlert(/*string planetName, int health*/)
     {
+        textbox.transform.position = startLocation;
+
         string planetName = "Earth";
         int health = Random.Range(1, 5);
 
@@ -53,6 +63,15 @@ public class NewsAlert : MonoBehaviour {
                 break;
         }
         textbox.text = string.Format(StartPhrases[Random.Range(0, StartPhrases.Count)] + Phrases[Random.Range(0, Phrases.Count)], planetName, population);
+    }
+
+    IEnumerator WaitAndMove()
+    {
+        while (true)
+        {
+            textbox.transform.Translate(speed * Vector3.left * Time.deltaTime);
+            yield return null;
+        }
     }
 
 }

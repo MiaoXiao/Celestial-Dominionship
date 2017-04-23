@@ -22,7 +22,6 @@ public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Hit");
         if (Body == null)
         {
             DragUtility.Instance.LastLocation = this.transform.position;

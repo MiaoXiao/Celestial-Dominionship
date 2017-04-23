@@ -65,7 +65,8 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
         curr_player.Dust -= GetCelest().purchaseCost;
         curr_player.Buys--;
-        curr_player.Discard.Add(this);
+        curr_player.DiscardDeck.Add(this);
+        curr_player.
 
         //Add Discard animation
         //Move to object pooler

@@ -9,26 +9,26 @@ public class SpecialBody : CelestialBody {
     [SerializeField]
     private Special SpecialRef;
 
-    private void Awake()
+
+    protected override Celest GetCelest()
     {
-        SpecialRef = Instantiate<Special>(SpecialRef);
-        CelestRef = SpecialRef;
+        return SpecialRef;
     }
 
-    public override void Display()
+    private void Awake()
     {
-
+        SpecialRef = Instantiate(SpecialRef);
     }
 
     public override void OnHit()
     {
         
     }
+
     //When the card is played
     public override void Play()
     {
         Activate.Instance.ActivateEffect(SpecialRef, GameManager.Instance.CurrentPlayer);
     }
-
 
 }

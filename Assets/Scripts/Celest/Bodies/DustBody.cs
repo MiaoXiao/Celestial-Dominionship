@@ -4,33 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DustBody : RankedBody, IPointerEnterHandler, IPointerExitHandler
+public class DustBody : RankedBody
 {
-
     [SerializeField]
     private Dust DustRef;
 
     private void Awake()
     {
-        CelestRef = DustRef;
+        DustRef = Instantiate(DustRef);
     }
 
-    public override void Display()
+    protected override Celest GetCelest()
     {
+        return DustRef;
     }
 
     public override void Play()
     {
         GameManager.Instance.CurrentPlayer.Dust += DustRef.value;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ToolTipUtility.Instance.ShowToolTip(DustRef);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ToolTipUtility.Instance.HideToolTip("Celest");
     }
 }

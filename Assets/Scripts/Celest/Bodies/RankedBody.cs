@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RankedBody : CelestialBody {
-    public override void Display()
-    {
-        throw new NotImplementedException();
-    }
-
+public abstract class RankedBody : CelestialBody
+{
     public override void OnHit()
     {
         throw new NotImplementedException();

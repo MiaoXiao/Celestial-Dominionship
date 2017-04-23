@@ -1,13 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorBody: RankedBody {
+public abstract class MeteorBody: RankedBody
+{
 
-    Vector2 Target;
-    public override void Play()
-    {
-
-    }
     
 }

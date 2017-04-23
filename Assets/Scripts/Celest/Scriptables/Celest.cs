@@ -9,9 +9,6 @@ public abstract class Celest : ScriptableObject{
     public int playCost; // PRICE COST
     [SerializeField]
     public int purchaseCost;
-    [SerializeField]
-    public Mesh model; // MODEL LOCATION, CURRENTLY OBJECT UNTIL REPLACED WITH CURRENT SHIT
-
 
     public abstract string GetDescription();
 }

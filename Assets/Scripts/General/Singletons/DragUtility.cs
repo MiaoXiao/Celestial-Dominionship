@@ -26,6 +26,7 @@ public class DragUtility : Singleton<DragUtility>
     /// </summary>
     public float MinimumDragDistance = 1000000f;
 
+    private bool dragging;
     public Vector3 LastLocation;
     public GameObject LastParent;
     public GameObject Temp;
@@ -49,27 +50,41 @@ public class DragUtility : Singleton<DragUtility>
         SoundManager.Instance.PlayAudioSource(StartDragItemSound);
 
         LastLocation = card.transform.position;
+        dragging = true;
+        StartCoroutine(Drag(card));
         //LastContainer = card.transform.parent.parent.parent.GetComponent<GridContainer>();
 
        // card.transform.SetParent(UIController.Instance.transform, true);
         
     }
 
+    IEnumerator Drag(GameObject card)
+    {
+        while (dragging)
+        {
+            Dragging(card);
+            yield return null;
+        }
+    }
+
     public void Dragging(GameObject card)
     {
+        Vector3 Loc;
         Ground = new Plane(Vector3.up, card.transform.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float rayDistance;
         if (Ground.Raycast(ray, out rayDistance))
         {
-            Debug.Log(rayDistance);
-            Debug.Log(ray.GetPoint(rayDistance));
-            card.transform.position = ray.GetPoint(rayDistance) + new Vector3(5,0,0);
+            Loc = ray.GetPoint(rayDistance);
+            Loc.y = 3.0f;
+            card.transform.position = Loc + new Vector3(5,0,0f);
         }
     }
 
     public void EndDrag(GameObject card)
     {
+        dragging = false;
+
         SoundManager.Instance.PlayAudioSource(EndDragItemSound);
 
         //Current lowest distance between grid and currently held card

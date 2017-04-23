@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CelestialBody : MonoBehaviour {
+public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
 
     protected Celest CelestRef;
 
@@ -30,4 +30,23 @@ public class CelestialBody : MonoBehaviour {
         //GameManager.Instance.CurrentPlayer.AddDiscard
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        DragUtility.Instance.StartDrag(this.gameObject);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        DragUtility.Instance.EndDrag(this.gameObject);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        
+    }
 }

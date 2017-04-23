@@ -5,6 +5,10 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private GameState _State;
+    [SerializeField]
+    private Grid Shop;
+    [SerializeField]
+    private CelestialBody planet;
     public GameState State
     {
         get { return _State; }
@@ -28,10 +32,11 @@ public class GameManager : Singleton<GameManager>
     public Player OppositePlayer { get; private set; }
     private GameObject UITabReference;
 
-    private void Awake()
+    private void Start()
     {
         CurrentPlayer = PlayerOne;
         OppositePlayer = PlayerTwo;
+        PopulateShop();
     }
 
     public void SwitchTurn()
@@ -47,6 +52,12 @@ public class GameManager : Singleton<GameManager>
             OppositePlayer = PlayerTwo;
         }
 
+    }
+    public void PopulateShop()
+    {
+        Shop = Instantiate<Grid>(Shop);
+        Shop.ReInitGrid(new Vector2(2, 8));
+        Shop.PopulateGrid(planet, new Vector2(1, 1));
     }
 
 

@@ -8,6 +8,16 @@ public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 {
     public Vector2 Position;
     public CelestialBody Body = null;
+    public Grid mygrid {
+        get
+        {
+            return transform.parent.parent.gameObject.GetComponent<Grid>();
+        }
+    }
+
+    private void Awake()
+    {
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

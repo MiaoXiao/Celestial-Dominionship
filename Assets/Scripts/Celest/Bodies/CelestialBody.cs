@@ -55,12 +55,16 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         print("attempting to buy " + GetCelest().name);
 
         Player curr_player = GameManager.Instance.CurrentPlayer;
+        if (curr_player == null)
+            throw new Exception("Current player is null.");
+
         if (curr_player.Dust < GetCelest().purchaseCost ||
-            curr_player.buysAvailible <= 0)
+            curr_player.Buys <= 0)
             return;
 
         curr_player.Dust -= GetCelest().purchaseCost;
-        curr_player.buysAvailible--;
+        curr_player.Buys--;
+        curr_player.Discard.Add(this);
 
         owner = curr_player;
     }

@@ -81,6 +81,6 @@ public class Activate : Singleton<Activate>
     public void Buys(int val)
     {
         if (CurrentPlayer != null)
-            CurrentPlayer.buysAvailible += val;
+            CurrentPlayer.Buys += val;
     }
 }

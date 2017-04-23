@@ -4,34 +4,65 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    List<CelestialBody> CurrentHand;
-    List<CelestialBody> Deck;
-    List<CelestialBody> Discard;
+    public List<CelestialBody> CurrentHand = new List<CelestialBody>();
+    public List<CelestialBody> MainDeck = new List<CelestialBody>();
+    public List<CelestialBody> Discard = new List<CelestialBody>();
     //Grid Field;
 
-    public int Dust;
-    public int buysAvailible;
-    public int cardDraw;
+    public int Dust = 0;
+    public int Buys = 1;
+    public int cardDraw = 5;
 
     public delegate void Passives();
     public Passives perTick;
 
-    public void Draw(int bonusCards = 0)
+    /// <summary>
+    /// Draw specified number of cards into your hand up until your card draw.
+    /// Shuffle discard back into Main deck if neccesary
+    /// </summary>
+    public void Draw(int cards)
     {
-        int drawCards = 5 + bonusCards;
-        while (Deck.Count > 0 && drawCards > 0)
+        int drawnCards = cards;
+        while (drawnCards > 0)
         {
-            CurrentHand.Add(Deck[0]);
-            Deck.RemoveAt(0);
-            drawCards--;
+            CurrentHand.Add(MainDeck[0]);
+            MainDeck.RemoveAt(0);
+            drawnCards--;
+
+            if (MainDeck.Count == 0)
+            {
+                RemakeDeck();
+                if (MainDeck.Count == 0)
+                    drawnCards = 0;
+            }
         }
     }
 
+    /// <summary>
+    /// Put discard pile back into main deck
+    /// </summary>
+    public void RemakeDeck()
+    {
+        if (MainDeck.Count != 0)
+            return;
+
+        MainDeck = new List<CelestialBody>(Discard);
+        DeckShuffle(ref MainDeck);
+
+    }
+
+    /// <summary>
+    /// Empty your current hand
+    /// </summary>
     public void EmptyHand()
     {
         CurrentHand.Clear();
     }
 
+    /// <summary>
+    /// Shuffle a specified deck
+    /// </summary>
+    /// <param name="list"></param>
     public void DeckShuffle(ref List<CelestialBody> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -58,7 +89,7 @@ public class Player : MonoBehaviour
         // buy stuff
 
         // shuffle draw pile
-        DeckShuffle(ref Deck);
+        DeckShuffle(ref MainDeck);
     }
 
 }

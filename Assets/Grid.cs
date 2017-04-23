@@ -41,6 +41,8 @@ public class Grid : MonoBehaviour
         ReInitGrid(Dimensions);
         for(int x = 0; x < ListToPopulate.Count; x++)
         {
+            Debug.Log(Dimensions.x);
+            Debug.Log(x % Dimensions.x);
             PopulateGrid(ListToPopulate[x], new Vector2(x % Dimensions.x, (int)(x / Dimensions.x)));
         }
     }
@@ -62,28 +64,30 @@ public class Grid : MonoBehaviour
         SlotList.Clear();
         Dimensions = dimensions;
 
-        IntervalX = MeshRenderer.bounds.size.x / dimensions.x;
+        //IntervalX = MeshRenderer.bounds.size.x / dimensions.x;
+        IntervalX = 6.25f;
         float current_interval_x = 0f;
-        for (int i = 0; i < dimensions.x + 1; ++i)
-        {
-            GameObject line_obj = LinePooler.RetrieveCopy();
-
-            Vector3[] line = new Vector3[2];
-            line[0] = new Vector3(Min.x, 0, Min.z + current_interval_x);
-            line[1] = new Vector3(Max.x, 0, Min.z + current_interval_x);
-            line_obj.GetComponent<LineRenderer>().SetPositions(line);
-            current_interval_x += IntervalX;
-        }
-
-        IntervalY = MeshRenderer.bounds.size.z / dimensions.y;
-        float current_interval_y = 0f;
         for (int i = 0; i < dimensions.y + 1; ++i)
         {
             GameObject line_obj = LinePooler.RetrieveCopy();
 
             Vector3[] line = new Vector3[2];
-            line[0] = new Vector3(Max.x - current_interval_y, 0, Min.z);
-            line[1] = new Vector3(Max.x - current_interval_y, 0, Max.z);
+            line[0] = new Vector3(Min.x, 0, Min.z + current_interval_x);
+            line[1] = new Vector3(Max.x - Mathf.Clamp(IntervalX * (Dimensions.y - Dimensions.x), 0, IntervalX * Dimensions.y), 0, Min.z + current_interval_x);
+            line_obj.GetComponent<LineRenderer>().SetPositions(line);
+            current_interval_x += IntervalX;
+        }
+
+        //IntervalY = MeshRenderer.bounds.size.z / dimensions.y;
+        IntervalY = 6.25f;
+        float current_interval_y = 0f;
+        for (int i = 0; i < dimensions.x + 1; ++i)
+        {
+            GameObject line_obj = LinePooler.RetrieveCopy();
+
+            Vector3[] line = new Vector3[2];
+            line[0] = new Vector3(Min.x + current_interval_y, 0, Min.z);
+            line[1] = new Vector3(Min.x + current_interval_y, 0, Max.z - Mathf.Clamp(IntervalY * (Dimensions.x - Dimensions.y), 0, IntervalY * Dimensions.x));
             line_obj.GetComponent<LineRenderer>().SetPositions(line);
             current_interval_y += IntervalY;
         }
@@ -95,8 +99,8 @@ public class Grid : MonoBehaviour
             {
                 GameObject slot = GridPooler.RetrieveCopy();
                 slot.GetComponent<GridSlot>().Position = new Vector2(i, j);
-                slot.transform.position = new Vector3(j * IntervalY + Min.z + IntervalY / 2, 0 ,(i * IntervalX) + Min.x + IntervalX / 2);
-                slot.transform.localScale = new Vector3(IntervalY, 0.5f, IntervalX);
+                slot.transform.position = new Vector3((i * IntervalX) + Min.x + IntervalX / 2, 0, j * IntervalY + Min.z + IntervalY / 2);
+                slot.transform.localScale = new Vector3(IntervalX, 0.5f, IntervalY);
                 //SetMeshSize(IntervalX, 0, IntervalY);
                 SlotList.Add(slot.GetComponent<GridSlot>().Position, slot.GetComponent<GridSlot>());
             }

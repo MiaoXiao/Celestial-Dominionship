@@ -118,6 +118,7 @@ public class DragUtility : Singleton<DragUtility>
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
             LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+            card.GetComponent<CelestialBody>().isLocked = LastParent.GetComponent<GridSlot>().mygrid.Locked;
         }
         else
         {

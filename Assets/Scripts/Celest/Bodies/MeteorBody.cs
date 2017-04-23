@@ -5,6 +5,5 @@ using UnityEngine;
 
 public abstract class MeteorBody: RankedBody
 {
-
-    
+    public Meteor MeteorRef;
 }

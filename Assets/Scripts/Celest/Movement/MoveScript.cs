@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveScript : MonoBehaviour {
+public class MoveScript : MonoBehaviour
+{
+    [SerializeField]
+    private float Speed;
 
-    public Transform gameTransform;
+    public bool isActive { get; set; }
 
-    public float speed;
-    public bool isActive;
-    public Vector3 direction;
-
-    private IEnumerator coroutine;
+    private Vector3 Direction;
 
 	// Use this for initialization
-	void Start () {
-        gameTransform = gameObject.transform;
+	void Start ()
+    {
         isActive = false;
-        StartMovement();
-}
+        //StartMovement(speed, direction);
+    }
 
-    public void StartMovement()
+    public void StartMovement(float speed, Vector3 direction)
     {
         isActive = true;
+        Speed = speed;
+        Direction = direction;
         StartCoroutine("WaitandMove");
     }
 
@@ -29,7 +30,7 @@ public class MoveScript : MonoBehaviour {
     {
         while (isActive)
         {
-            gameTransform.Translate(speed * direction * Time.deltaTime);
+            transform.Translate(Speed * Direction * Time.deltaTime);
             yield return null;
         }
     }

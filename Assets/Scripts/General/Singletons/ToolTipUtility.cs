@@ -61,8 +61,9 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     /// <summary>
     /// Show tooltip and pass in information
     /// </summary>
-    public void ShowToolTip(Celest data)
+    public void ShowToolTip(CelestialBody celest_body)
     {
+        Celest data = celest_body.GetCelest();
         Text[] list = AllTooltips["Celest"].transform.GetComponentsInChildren<Text>();
 
         foreach (Text element in list)
@@ -84,6 +85,19 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                 case "Use Cost":
                     element.text = data.playCost.ToString();
                     break;
+                case "Usage":
+                    if (celest_body is CometBody && celest_body.isLocked)
+                        element.text = "[Left Click to Launch]";
+                    else if (celest_body.owner == null)
+                        element.text = "[Left Click to Purchase]";
+                    else if (celest_body is CometBody || celest_body is PlanetBody)
+                        element.text = "[Drag to your Galaxy to place this Celestial]";
+                    else if (celest_body is SpecialBody)
+                        element.text = "[Drag outside to use this effect]";
+                    break;
+                default:
+                    throw new System.Exception("Could not find usage text.");
+                    
             }
         }
         AllTooltips["Celest"].SetActive(true);

@@ -2,34 +2,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CometBody : MeteorBody
 {
-    [SerializeField]
-    private Comet CometRef;
-
     private MoveScript Mover = null;
 
-    public override void OnHit()
+    private bool Primed = false;
+
+    private bool Fired = false;
+
+    public override void OnHit(Collider collision)
     {
-        throw new NotImplementedException();
+        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
+        if (meteor_body == null)
+            return;
+
+        MeteorRef.health--;
+        if (MeteorRef.health <= 0)
+            gameObject.SetActive(false);
+
     }
 
     public override void Play()
     {
-        throw new NotImplementedException();
+        if (Fired)
+            return;
+
+        if (!Mover.isActive)
+        {
+            print("move");
+            Mover.StartMovement(MeteorRef.projectileSpeed, Vector3.right);
+            Fired = true;
+        }
     }
 
-    protected override Celest GetCelest()
+    public override void OnPointerDown(PointerEventData eventData)
     {
-        return CometRef;
+        base.OnPointerDown(eventData);
+
+        if (isLocked)
+            Play();
+    }
+
+    public override Celest GetCelest()
+    {
+        return MeteorRef;
     }
 
     // Use this for initialization
-    void Awake ()
+    void OnEnable ()
     {
-        CometRef = Instantiate(CometRef);
-        CometRef.name = CometRef.name.Replace("(Clone)", "").Trim();
+        MeteorRef = Instantiate(MeteorRef);
+        MeteorRef.name = MeteorRef.name.Replace("(Clone)", "").Trim();
 
         Mover = GetComponent<MoveScript>();
         if (Mover == null)

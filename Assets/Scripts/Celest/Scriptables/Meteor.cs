@@ -10,4 +10,5 @@ public abstract class Meteor : Ranked
     public int health;
     [SerializeField]
     public int radius;
+    public float projectileSpeed = 30f;
 }

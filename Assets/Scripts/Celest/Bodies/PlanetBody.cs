@@ -8,13 +8,13 @@ public class PlanetBody : CelestialBody
     [SerializeField]
     private Planet PlanetRef;
 
-    private void Awake()
+    private void OnEnable()
     {
         PlanetRef = Instantiate(PlanetRef);
         PlanetRef.name = PlanetRef.name.Replace("(Clone)", "").Trim();
     }
 
-    protected override Celest GetCelest()
+    public override Celest GetCelest()
     {
         return PlanetRef;
     }
@@ -41,15 +41,19 @@ public class PlanetBody : CelestialBody
     }
 
     //Will be called every time the planet is hit
-    public override void OnHit()
+    public override void OnHit(Collider collision)
     {
+        MeteorBody meteor_body = collision.gameObject.GetComponent<MeteorBody>();
+        if (meteor_body == null)
+            return;
+
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
             if (x.currentType == PSType.OnTick)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
-        PlanetRef.health--;
+        PlanetRef.health -= meteor_body.MeteorRef.damage;
         if(PlanetRef.health <= 0)
         {
             OnDeath();

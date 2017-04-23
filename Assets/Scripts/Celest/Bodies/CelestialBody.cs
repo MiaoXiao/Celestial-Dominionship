@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool isLocked = false;
+    public bool isLocked = true;
     public Player owner = null;
 
     public abstract Celest GetCelest();
@@ -66,7 +66,6 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         curr_player.Dust -= GetCelest().purchaseCost;
         curr_player.Buys--;
         curr_player.Discard.Add(this);
-        isLocked = true;
 
         //Add Discard animation
         //Move to object pooler
@@ -76,12 +75,15 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        //Debug.Log("Hit");
-        if (owner == null)
+        if (GameManager.Instance.CurrentPlayer.BuyEnable)
         {
-            Buy();
+            //Debug.Log("Hit");
+            if (owner == null)
+            {
+                Buy();
+            }
         }
-        else if(eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
             DragUtility.Instance.StartDrag(this.gameObject);
     }
 

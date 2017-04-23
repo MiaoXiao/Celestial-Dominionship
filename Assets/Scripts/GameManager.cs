@@ -18,8 +18,8 @@ public class GameManager : Singleton<GameManager>
         {
             if (value == _State)
                 return;
-
-            _State.OnStateExit();
+            if (_State != null)
+                _State.OnStateExit();
 
             _State = value;
 
@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentPlayer = PlayerOne;
         OppositePlayer = PlayerTwo;
-        _State = new InitGameState();
+        State = new InitGameState();
         //PopulateShop();
     }
 
@@ -68,19 +68,19 @@ public class GameManager : Singleton<GameManager>
         switch (currState)
         {
             case States.Buy:
-                _State = new PlayState();
+                State = new SwitchPlayerState();
                 break;
             case States.Draw:
-                _State = new BuyState();
+                State = new PlayState();
                 break;
             case States.Init:
-                _State = new DrawState();
+                State = new DrawState();
                 break;
             case States.Play:
-                _State = new SwitchPlayerState();
+                State = new BuyState();
                 break;
             case States.Switch:
-                _State = new DrawState();
+                State = new DrawState();
                 break;
             default:
                 break;

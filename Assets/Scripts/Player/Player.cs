@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public List<CelestialBody> CurrentHand = new List<CelestialBody>();
     public List<CelestialBody> MainDeck = new List<CelestialBody>();
     public List<CelestialBody> Discard = new List<CelestialBody>();
+    public bool BuyEnable;
+    public bool PlayEnable;
     //Grid Field;
 
     private int _Dust = 0;
@@ -130,15 +132,13 @@ public class Player : MonoBehaviour
 
     public void Play()
     {
+        PlayEnable = true;
 
     }
 
     public void Buy()
     {
-        // buy stuff
-
-        // shuffle draw pile
-        DeckShuffle(ref MainDeck);
+        BuyEnable = true;
     }
 
 }

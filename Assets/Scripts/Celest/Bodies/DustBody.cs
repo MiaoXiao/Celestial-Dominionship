@@ -20,6 +20,13 @@ public class DustBody : RankedBody
         return DustRef;
     }
 
+
+    //When the object is hit on the grid
+    public override void OnHit()
+    {
+
+    }
+
     public override void Play()
     {
         GameManager.Instance.CurrentPlayer.Dust += DustRef.value;

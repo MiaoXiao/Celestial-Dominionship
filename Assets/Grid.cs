@@ -150,15 +150,8 @@ public class Grid : MonoBehaviour
 
     }
 
-    public void PopulateGrid(List<CelestialBody> population)
+    public void PopulateGrid(CelestialBody body, Vector2 Loc)
     {
-        GridSlot[] slots = new GridSlot[SlotList.Count];
-        SlotList.Values.CopyTo(slots, 0);
-        int index = 0;
-        foreach (CelestialBody x in population)
-        {
-            slots[index].Body = x;
-            index++;
-        }
+        SlotList[Loc].Body = body;
     }
 }

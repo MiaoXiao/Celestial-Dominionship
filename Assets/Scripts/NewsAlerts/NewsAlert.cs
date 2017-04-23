@@ -28,7 +28,7 @@ public class NewsAlert : MonoBehaviour {
     void Update()
     {
         time += Time.deltaTime;
-        if (time > 5)
+        if (time > 20)
         {
             time = 0;
             CallNewsAlert();

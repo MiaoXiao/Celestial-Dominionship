@@ -17,6 +17,7 @@ public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 
     private void Awake()
     {
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -89,6 +89,10 @@ public class DragUtility : Singleton<DragUtility>
 
     public void EndDrag(GameObject card)
     {
+        if (!dragging)
+        {
+            return;
+        }
         dragging = false;
 
         SoundManager.Instance.PlayAudioSource(EndDragItemSound);

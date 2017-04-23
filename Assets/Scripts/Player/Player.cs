@@ -130,15 +130,4 @@ public class Player : MonoBehaviour
 
     }
 
-    public void Play()
-    {
-        PlayEnable = true;
-
-    }
-
-    public void Buy()
-    {
-        BuyEnable = true;
-    }
-
 }

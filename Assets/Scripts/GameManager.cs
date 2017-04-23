@@ -44,6 +44,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SwitchTurn()
     {
+        State = new SwitchPlayerState();
         if (CurrentPlayer == PlayerOne)
         {
             CurrentPlayer = PlayerTwo;
@@ -61,31 +62,6 @@ public class GameManager : Singleton<GameManager>
         //Shop = Instantiate<Grid>(Shop);
         //Shop.ReInitGrid(new Vector2(2, 8));
         //Shop.PopulateGrid(planet, new Vector2(1, 1));
-    }
-
-    public void IterateState()
-    {
-        switch (currState)
-        {
-            case States.Buy:
-                State = new SwitchPlayerState();
-                break;
-            case States.Draw:
-                State = new PlayState();
-                break;
-            case States.Init:
-                State = new DrawState();
-                break;
-            case States.Play:
-                State = new BuyState();
-                break;
-            case States.Switch:
-                State = new DrawState();
-                break;
-            default:
-                break;
-        }
-
     }
 
 

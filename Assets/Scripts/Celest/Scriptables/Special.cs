@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Effect { Dust, StarHealth, CardDraw, RotateGrid, Buys, Trash }
-//public enum SType { OnTick, OnHit, OnDestroy, OnPlay, Passive }
 
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreateSpecialObject", order = 2)]
-public class Special : Celest {
+public class Special : Celest
+{
     
     [SerializeField]
     public Effect currentEffect; // EFFECT, DUH
     public int value;
-    /*
-    [SerializeField]
-    public SType currentType; // WHAT TRIGGERS THE EFFECT
-    */
+    
     public bool affectsUser = true;
 
     public override string GetDescription()
@@ -39,8 +36,6 @@ public class Special : Celest {
                 desc += "Destroy " + value + " Celestrals in your Home or in your Galaxy.";
                 break;
         }
-
-        
 
         return desc;
     }

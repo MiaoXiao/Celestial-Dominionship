@@ -19,10 +19,10 @@ public class Planet : Celest
         desc += "Health " + health.ToString();
         if (PlanetEffects.Count != 0)
         {
-            desc += "/n While Alive: ";
+            desc += "\n Per Turn: ";
             foreach(PlanetSpecial special in PlanetEffects)
             {
-                desc += "/n" + special.GetDescription();
+                desc += "\n" + special.GetDescription();
             }
         }
         return desc;

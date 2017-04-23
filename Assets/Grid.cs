@@ -41,7 +41,7 @@ public class Grid : MonoBehaviour
         ReInitGrid(Dimensions);
         for(int x = 0; x < ListToPopulate.Count; x++)
         {
-            PopulateGrid(ListToPopulate[x], new Vector2(x % Dimensions.x, x / Dimensions.x));
+            PopulateGrid(ListToPopulate[x], new Vector2(x % Dimensions.x, (int)(x / Dimensions.x)));
         }
     }
 
@@ -59,6 +59,7 @@ public class Grid : MonoBehaviour
     /// </summary>
     public void ReInitGrid(Vector2 dimensions)
     {
+        SlotList.Clear();
         Dimensions = dimensions;
 
         IntervalX = MeshRenderer.bounds.size.x / dimensions.x;
@@ -97,7 +98,6 @@ public class Grid : MonoBehaviour
                 slot.transform.position = new Vector3(j * IntervalY + Min.z + IntervalY / 2, 0 ,(i * IntervalX) + Min.x + IntervalX / 2);
                 slot.transform.localScale = new Vector3(IntervalY, 0.5f, IntervalX);
                 //SetMeshSize(IntervalX, 0, IntervalY);
-                Debug.Log(slot.GetComponent<GridSlot>().Position);
                 SlotList.Add(slot.GetComponent<GridSlot>().Position, slot.GetComponent<GridSlot>());
             }
         }
@@ -160,7 +160,7 @@ public class Grid : MonoBehaviour
 
     public void PopulateGrid(CelestialBody body, Vector2 Loc)
     {
-        Debug.Log(Loc);
+        body = Instantiate<CelestialBody>(body);
         DragUtility.Instance.EndDrag(body.gameObject,SlotList[Loc].gameObject);
     }
 }

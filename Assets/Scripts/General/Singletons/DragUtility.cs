@@ -96,6 +96,7 @@ public class DragUtility : Singleton<DragUtility>
         float lowest_distance = MinimumDragDistance;
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
+            Temp = new GameObject();
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
@@ -112,6 +113,7 @@ public class DragUtility : Singleton<DragUtility>
     {
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
+            Temp = new GameObject();
             card.transform.position = LastParent.transform.position;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);

@@ -26,6 +26,7 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Hit");
         DragUtility.Instance.StartDrag(this.gameObject);
     }
 

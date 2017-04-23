@@ -21,7 +21,6 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
     {
         GameManager.Instance.CurrentPlayer.Dust -= GetCelest().purchaseCost;
         GameManager.Instance.CurrentPlayer.buysAvailible--;
-        inShop = false;
         //GameManager.Instance.CurrentPlayer.AddDiscard
     }
 

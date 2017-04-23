@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Note: when changing current hand, you also need to change the Grid associated with that hand
     public List<CelestialBody> CurrentHand = new List<CelestialBody>();
     public List<CelestialBody> MainDeck = new List<CelestialBody>();
     public List<CelestialBody> Discard = new List<CelestialBody>();
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
                 _Dust = 0;
             else
                 _Dust = value;
+
+            //update ui here with UIController.Instance.UpdateUI()
         }
     }
     private int _Buys = 1;
@@ -37,6 +40,8 @@ public class Player : MonoBehaviour
                 _Buys = 0;
             else
                 _Buys = value;
+
+            //update ui here with UIController.Instance.UpdateUI()
         }
     }
     private int _cardDraw = 5;
@@ -52,6 +57,8 @@ public class Player : MonoBehaviour
                 _cardDraw = 0;
             else
                 _cardDraw = value;
+
+            //update ui here with UIController.Instance.UpdateUI()
         }
     }
 

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreatePlanetObject", order = 1)]
-public class Planet : Celest {
-
+public class Planet : Celest
+{
     [SerializeField]
-    public List<Special> PassiveEffects; // LIST OF SPECIALS AKA EFFECTS
+    public List<PlanetSpecial> PlanetEffects; // LIST OF SPECIALS AKA EFFECTS
+
     [SerializeField]
     public int health; // HEALTH
     [SerializeField]
@@ -15,6 +16,16 @@ public class Planet : Celest {
 
     public override string GetDescription()
     {
-        return "Health " + health.ToString();
+        string desc = "";
+        desc += "Health " + health.ToString();
+        if (PlanetEffects.Count != 0)
+        {
+            desc += "/n While Alive: ";
+            foreach(PlanetSpecial special in PlanetEffects)
+            {
+                desc += "/n" + special.GetDescription();
+            }
+        }
+        return desc;
     }
 }

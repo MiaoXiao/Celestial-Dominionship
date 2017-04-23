@@ -12,6 +12,7 @@ public class DustBody : RankedBody
     private void Awake()
     {
         DustRef = Instantiate(DustRef);
+        DustRef.name = DustRef.name.Replace("(Clone)", "").Trim();
     }
 
     protected override Celest GetCelest()

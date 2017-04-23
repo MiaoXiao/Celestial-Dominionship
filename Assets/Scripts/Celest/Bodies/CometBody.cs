@@ -17,5 +17,6 @@ public class CometBody : MeteorBody
     void Awake ()
     {
         CometRef = Instantiate(CometRef);
-	}
+        CometRef.name = CometRef.name.Replace("(Clone)", "").Trim();
+    }
 }

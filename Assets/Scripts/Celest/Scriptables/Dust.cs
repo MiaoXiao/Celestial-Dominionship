@@ -10,6 +10,6 @@ public class Dust : Ranked {
 
     public override string GetDescription()
     {
-        return "Worth " + value.ToString() + " Dust";
+        return "Gain " + value.ToString() + " Dust";
     }
 }

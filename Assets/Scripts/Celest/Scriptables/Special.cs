@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Effect { Dust, StarHealth, CardDraw, RotateGrid, GenerateMeteor, Buys, Trash }
-public enum SType { OnTick, OnHit, OnDestroy, OnPlay }
+public enum Effect { Dust, StarHealth, CardDraw, RotateGrid, Buys, Trash }
+//public enum SType { OnTick, OnHit, OnDestroy, OnPlay, Passive }
 
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreateSpecialObject", order = 2)]
 public class Special : Celest {
@@ -11,14 +11,37 @@ public class Special : Celest {
     [SerializeField]
     public Effect currentEffect; // EFFECT, DUH
     public int value;
+    /*
     [SerializeField]
     public SType currentType; // WHAT TRIGGERS THE EFFECT
-    public bool affectedPlayer;
-
-    public string Description = "Special Description";
+    */
+    public bool affectsUser = true;
 
     public override string GetDescription()
     {
-        return "Description";
+        string desc = "";
+        switch (currentEffect)
+        {
+            case Effect.Dust:
+                desc += "Gain " + value + " Dust.";
+                break;
+            case Effect.Buys:
+                desc += "Gain " + value + " extra Wormholes for this turn only.";
+                break;
+            case Effect.CardDraw:
+                desc += "Gain " + value + " extra Warps for this turn only.";           
+                break;
+            case Effect.RotateGrid:
+                break;
+            case Effect.StarHealth:
+                break;
+            case Effect.Trash:
+                desc += "Destroy " + value + " Celestrals in your Home or in your Galaxy.";
+                break;
+        }
+
+        
+
+        return desc;
     }
 }

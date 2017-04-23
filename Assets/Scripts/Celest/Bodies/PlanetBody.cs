@@ -8,13 +8,10 @@ public class PlanetBody : CelestialBody
     [SerializeField]
     private Planet PlanetRef;
 
-    private List<Special> Death;
-    private List<Special> Hit;
-    private List<Special> Tick;
-
     private void Awake()
     {
         PlanetRef = Instantiate(PlanetRef);
+        PlanetRef.name = PlanetRef.name.Replace("(Clone)", "").Trim();
     }
 
     protected override Celest GetCelest()
@@ -25,40 +22,33 @@ public class PlanetBody : CelestialBody
     public override void Play()
     {
         //Check when the effect will be used
-        foreach(Special x in PlanetRef.PassiveEffects)
+        foreach(PlanetSpecial x in PlanetRef.PlanetEffects)
         {
             switch (x.currentType)
             {
-                case SType.OnDestroy:
-                    Death.Add(x);
-                    break;
                 case SType.OnPlay:
-                    Activate.Instance.ActivateEffect(x, GameManager.Instance.CurrentPlayer);
-                    break;
-                case SType.OnHit:
-                    Hit.Add(x);
+                    Activate.Instance.ActivatePlanetEffect(x, GameManager.Instance.CurrentPlayer);
                     break;
                 case SType.OnTick:
                     GameManager.Instance.CurrentPlayer.passives += this.OnTick;
-                    Tick.Add(x);
                     break;
                 default:
                     break;
             }
         }
+        
         owner = GameManager.Instance.CurrentPlayer;
     }
 
     //Will be called every time the planet is hit
     public override void OnHit()
     {
-        if (Hit.Count > 0)
+        foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            foreach (Special x in Hit)
-            {
-                Activate.Instance.ActivateEffect(x, owner);
-            }
+            if (x.currentType == SType.OnTick)
+                Activate.Instance.ActivatePlanetEffect(x, owner);
         }
+        
         PlanetRef.health--;
         if(PlanetRef.health <= 0)
         {
@@ -69,22 +59,24 @@ public class PlanetBody : CelestialBody
     //When the planet dies
     public void OnDeath()
     {
-        if (Death.Count > 0)
+        
+        foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            foreach (Special x in Death)
-            {
-                Activate.Instance.ActivateEffect(x, owner);
-            }
+            if (x.currentType == SType.OnDestroy)
+                Activate.Instance.ActivatePlanetEffect(x, owner);
         }
+        
+        
         owner.passives -= this.OnTick;
     }
 
     //Is called every turn
     public void OnTick()
     {
-        foreach(Special x in Tick)
+        foreach(PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            Activate.Instance.ActivateEffect(x, owner);
+            if (x.currentType == SType.OnTick)
+                Activate.Instance.ActivatePlanetEffect(x, owner);
         }
     }
 }

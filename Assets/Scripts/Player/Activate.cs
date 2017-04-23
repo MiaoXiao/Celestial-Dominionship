@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Activate : Singleton<Activate> {
+public class Activate : Singleton<Activate>
+{
     Player CurrentPlayer;
 
-    public void ActivateEffect(Special effect, Player Owner)
+    public void ActivatePlanetEffect(PlanetSpecial effect, Player Owner)
     {
         //Check which player is going to recieve the effect
-        if (!effect.affectedPlayer)
+        if (!effect.affectsUser)
         {
             if (GameManager.Instance.CurrentPlayer == Owner)
                 CurrentPlayer = GameManager.Instance.OppositePlayer;
@@ -17,20 +18,48 @@ public class Activate : Singleton<Activate> {
         }
         else
             CurrentPlayer = Owner;
-        Effect eff = effect.currentEffect;
 
         //Do the effect
-        switch (eff)
+        switch (effect.currentEffect)
         {
-            case Effect.Dust:
+            case PlanetEffect.Dust:
                 Dust(effect.value);
                 break;
-            case Effect.CardDraw:
+            case PlanetEffect.CardDraw:
                 break;
+            case PlanetEffect.Buys:
+                Buys(effect.value);
+                break;
+            case PlanetEffect.GenerateMeteor:                
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ActivateSpecialEffect(Special effect, Player Owner)
+    {
+        //Check which player is going to recieve the effect
+        if (!effect.affectsUser)
+        {
+            if (GameManager.Instance.CurrentPlayer == Owner)
+                CurrentPlayer = GameManager.Instance.OppositePlayer;
+            else
+                CurrentPlayer = Owner;
+        }
+        else
+            CurrentPlayer = Owner;
+
+        //Do the effect
+        switch (effect.currentEffect)
+        {
             case Effect.Buys:
                 Buys(effect.value);
                 break;
-            case Effect.GenerateMeteor:
+            case Effect.CardDraw:
+                break;
+            case Effect.Dust:
+                Dust(effect.value);
                 break;
             case Effect.RotateGrid:
                 break;

@@ -22,7 +22,11 @@ public class CometBody : MeteorBody
 
         CometRef.piercing--;
         if (CometRef.piercing <= -1)
+        {
+            damageCelestWithinRadius();
             gameObject.SetActive(false);
+        }
+            
 
     }
 

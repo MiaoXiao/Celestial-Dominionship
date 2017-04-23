@@ -17,11 +17,8 @@ public class AsteroidBody : MeteorBody
     {
         print("ASTEROID ON HIT");
 
-        //Damage all tiles within radius
-
+        damageCelestWithinRadius();
         gameObject.SetActive(false);
-
-
     }
 
     public override void Play()

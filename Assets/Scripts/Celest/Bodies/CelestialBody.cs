@@ -29,24 +29,50 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
             OnHit(collision, (MeteorBody)celestial_body);
         else
             OnHit(collision, null);
-
-
     }
 
     /// <summary>
-    /// This probably should not be here, buying an objject should not be handled by the object itself, but by some kind of store manager.
+    /// Show or hide mesh for this celest body
+    /// </summary>
+    public bool IsVisible
+    {
+        get
+        {
+            return GetComponent<MeshRenderer>().enabled;
+        }
+        set
+        {
+            GetComponent<MeshRenderer>().enabled = value;
+        }
+    }
+
+    /// <summary>
+    ///Check if current player has enough dust to purchase and enough buys
+    ///If so, set this owner to current player, and move this celest body to thaat player's discard
     /// </summary>
     public void Buy()
     {
-        GameManager.Instance.CurrentPlayer.Dust -= GetCelest().purchaseCost;
-        GameManager.Instance.CurrentPlayer.buysAvailible--;
-        //GameManager.Instance.CurrentPlayer.AddDiscard
+        print("attempting to buy " + GetCelest().name);
+
+        Player curr_player = GameManager.Instance.CurrentPlayer;
+        if (curr_player.Dust < GetCelest().purchaseCost ||
+            curr_player.buysAvailible <= 0)
+            return;
+
+        curr_player.Dust -= GetCelest().purchaseCost;
+        curr_player.buysAvailible--;
+
+        owner = curr_player;
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         //Debug.Log("Hit");
-        if(eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        if (owner == null)
+        {
+            Buy();
+        }
+        else if(eventData.button == PointerEventData.InputButton.Left && !isLocked)
             DragUtility.Instance.StartDrag(this.gameObject);
     }
 

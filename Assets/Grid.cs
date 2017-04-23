@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField]
-    private Vector2 Dimensions = Vector2.one;
+    public Vector2 Dimensions = Vector2.one;
 
     public Dictionary<Vector2, GridSlot> SlotList = new Dictionary<Vector2, GridSlot>();
 

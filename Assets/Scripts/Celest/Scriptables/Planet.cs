@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreatePlanetObject", order = 1)]
 public class Planet : Celest
 {
-    [SerializeField]
     public List<PlanetSpecial> PlanetEffects; // LIST OF SPECIALS AKA EFFECTS
 
     [SerializeField]
@@ -20,10 +19,10 @@ public class Planet : Celest
         desc += "Health " + health.ToString();
         if (PlanetEffects.Count != 0)
         {
-            desc += "/n While Alive: ";
+            desc += "\n Per Turn: ";
             foreach(PlanetSpecial special in PlanetEffects)
             {
-                desc += "/n" + special.GetDescription();
+                desc += "\n" + special.GetDescription();
             }
         }
         return desc;

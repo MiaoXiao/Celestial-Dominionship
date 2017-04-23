@@ -12,6 +12,9 @@ public class Grid : MonoBehaviour
     private Player Owner;
 
     [SerializeField]
+    List<CelestialBody> ListToPopulate;
+
+    [SerializeField]
     public bool Locked;
 
     [SerializeField]
@@ -35,11 +38,15 @@ public class Grid : MonoBehaviour
 
         Min = MeshRenderer.bounds.min;
         Max = MeshRenderer.bounds.max;
+        ReInitGrid(Dimensions);
+        for(int x = 0; x < ListToPopulate.Count; x++)
+        {
+            PopulateGrid(ListToPopulate[x], new Vector2(x % Dimensions.x, x / Dimensions.x));
+        }
     }
 
     private void Start()
     {
-        ReInitGrid(Dimensions);
         //SetObj(new Vector2(5, 5), Example);
     }
 
@@ -87,9 +94,10 @@ public class Grid : MonoBehaviour
             {
                 GameObject slot = GridPooler.RetrieveCopy();
                 slot.GetComponent<GridSlot>().Position = new Vector2(i, j);
-                slot.transform.position = new Vector3((i * IntervalX) + Min.x + IntervalX / 2, 0, j * IntervalY + Min.z + IntervalY / 2);
-                slot.transform.localScale = new Vector3(IntervalX, 0.5f, IntervalY);
+                slot.transform.position = new Vector3(j * IntervalY + Min.z + IntervalY / 2, 0 ,(i * IntervalX) + Min.x + IntervalX / 2);
+                slot.transform.localScale = new Vector3(IntervalY, 0.5f, IntervalX);
                 //SetMeshSize(IntervalX, 0, IntervalY);
+                Debug.Log(slot.GetComponent<GridSlot>().Position);
                 SlotList.Add(slot.GetComponent<GridSlot>().Position, slot.GetComponent<GridSlot>());
             }
         }
@@ -152,6 +160,7 @@ public class Grid : MonoBehaviour
 
     public void PopulateGrid(CelestialBody body, Vector2 Loc)
     {
-        SlotList[Loc].Body = body;
+        Debug.Log(Loc);
+        DragUtility.Instance.EndDrag(body.gameObject,SlotList[Loc].gameObject);
     }
 }

@@ -29,6 +29,7 @@ public class DragUtility : Singleton<DragUtility>
     private bool dragging;
     public Vector3 LastLocation;
     public GameObject LastParent;
+    public Vector3 OriginalLoc;
     public GameObject Temp;
     public Plane Ground;
     private int LastIndex = -1;
@@ -48,10 +49,10 @@ public class DragUtility : Singleton<DragUtility>
     {
 
         SoundManager.Instance.PlayAudioSource(StartDragItemSound);
-
+        OriginalLoc = card.transform.position;
         LastLocation = card.transform.position;
         LastParent = card.transform.parent.parent.gameObject;
-        if (!LastParent.transform.parent.GetComponent<Grid>().Locked)
+        if (!LastParent.transform.parent.parent.GetComponent<Grid>().Locked)
         {
             dragging = true;
             StartCoroutine(Drag(card));
@@ -93,11 +94,34 @@ public class DragUtility : Singleton<DragUtility>
 
         //Current lowest distance between grid and currently held card
         float lowest_distance = MinimumDragDistance;
-        card.transform.position = LastLocation;
-        card.transform.SetParent(Temp.transform);
-        Temp.transform.SetParent(LastParent.transform, true);
-        LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+        if (LastParent.GetComponent<GridSlot>().Body == null)
+        {
+            card.transform.position = LastLocation;
+            card.transform.SetParent(Temp.transform);
+            Temp.transform.SetParent(LastParent.transform, true);
+            LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+        }
+        else
+        {
+            card.transform.position = OriginalLoc;
+        }
         
+    }
+
+    public void EndDrag(GameObject card, GameObject LastParent)
+    {
+        if (LastParent.GetComponent<GridSlot>().Body == null)
+        {
+            card.transform.position = LastParent.transform.position;
+            card.transform.SetParent(Temp.transform);
+            Temp.transform.SetParent(LastParent.transform, true);
+            LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+        }
+        else
+        {
+            card.transform.position = OriginalLoc;
+        }
+
     }
 
     public void CancelDrag(GameObject card)

@@ -26,11 +26,11 @@ public class PlanetBody : CelestialBody
         {
             switch (x.currentType)
             {
-                case SType.OnPlay:
+                case PSType.Passive:
                     Activate.Instance.ActivatePlanetEffect(x, GameManager.Instance.CurrentPlayer);
                     break;
-                case SType.OnTick:
-                    GameManager.Instance.CurrentPlayer.passives += this.OnTick;
+                case PSType.OnTick:
+                    GameManager.Instance.CurrentPlayer.perTick += this.OnTick;
                     break;
                 default:
                     break;
@@ -45,7 +45,7 @@ public class PlanetBody : CelestialBody
     {
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            if (x.currentType == SType.OnTick)
+            if (x.currentType == PSType.OnTick)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
@@ -62,12 +62,12 @@ public class PlanetBody : CelestialBody
         
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            if (x.currentType == SType.OnDestroy)
+            if (x.currentType == PSType.OnDestroy)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
         
         
-        owner.passives -= this.OnTick;
+        owner.perTick -= this.OnTick;
     }
 
     //Is called every turn
@@ -75,7 +75,7 @@ public class PlanetBody : CelestialBody
     {
         foreach(PlanetSpecial x in PlanetRef.PlanetEffects)
         {
-            if (x.currentType == SType.OnTick)
+            if (x.currentType == PSType.OnTick)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
     }

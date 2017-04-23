@@ -1,17 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlanetEffect { Dust, CardDraw, GenerateMeteor, Buys }
-public enum SType { OnTick, OnHit, OnDestroy, OnPlay, Passive }
+public enum PSType { OnTick, OnHit, OnDestroy, Passive }
 
-[CreateAssetMenu(fileName = "Celest", menuName = "Celest/CreatePlanetSpecialObject", order = 2)]
+[Serializable]
 public class PlanetSpecial
 {
     [SerializeField]
     public PlanetEffect currentEffect; // EFFECT, DUH
     public int value;
-    public SType currentType;
+    public PSType currentType;
 
     public bool affectsUser;
 
@@ -21,35 +22,18 @@ public class PlanetSpecial
         switch (currentEffect)
         {
             case PlanetEffect.Dust:
-                desc += "Gain " + value + " Dust.";
+                desc += "+" + value + " Dust.";
                 break;
             case PlanetEffect.Buys:
-                desc += "Gain " + value + " extra Wormholes.";
+                desc += "+" + value + " Wormholes.";
                 break;
             case PlanetEffect.CardDraw:
-                desc += "Gain " + value + " extra Warps.";
+                desc += "+" + value + " Warps.";
                 break;
             case PlanetEffect.GenerateMeteor:
-                desc += "Generates " + value + " meteor(s)";
+                desc += "Generate " + value + " meteor(s).";
                 break;
         }
-
-        switch (currentType)
-        {
-            case SType.OnDestroy:
-                desc += " when this planet is destroyed.";
-                break;
-            case SType.OnHit:
-                desc += " when this planet is hit.";
-                break;
-            case SType.OnPlay:
-                desc += " for this turn only.";
-                break;
-            case SType.OnTick:
-                desc += " per turn.";
-                break;
-        }
-
 
         return desc;
     }

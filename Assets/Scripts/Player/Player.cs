@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    List<Celest> CurrentHand;
-    List<Celest> Deck;
-    List<Celest> Discard;
+    List<CelestialBody> CurrentHand;
+    List<CelestialBody> Deck;
+    List<CelestialBody> Discard;
     //Grid Field;
 
     public int Dust;
     public int buysAvailible;
+    public int cardDraw;
 
     public delegate void Passives();
-    public Passives passives;
-
-    private void Display()
-    {
-       
-    }
+    public Passives perTick;
 
     public void Draw(int bonusCards = 0)
     {
@@ -36,11 +32,11 @@ public class Player : MonoBehaviour
         CurrentHand.Clear();
     }
 
-    public void DeckShuffle(ref List<Celest> list)
+    public void DeckShuffle(ref List<CelestialBody> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            Celest temp = list[i];
+            CelestialBody temp = list[i];
             int randomIndex = Random.Range(i, list.Count);
             list[i] = list[randomIndex];
             list[randomIndex] = temp;

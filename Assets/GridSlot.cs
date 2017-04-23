@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 {
     public Vector2 Position;
-    CelestialBody Body = null;
+    public CelestialBody Body = null;
 
     public void OnPointerEnter(PointerEventData eventData)
     {

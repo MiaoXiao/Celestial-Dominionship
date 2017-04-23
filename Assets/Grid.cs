@@ -9,6 +9,11 @@ public class Grid : MonoBehaviour
 
     public Dictionary<Vector2, GridSlot> SlotList = new Dictionary<Vector2, GridSlot>();
 
+    private Player Owner;
+
+    [SerializeField]
+    public bool Locked;
+
     [SerializeField]
     private GameObject Example;
 
@@ -121,5 +126,39 @@ public class Grid : MonoBehaviour
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+    }
+
+    /// <summary>
+    /// Enable or Disable depending on who the active player is
+    /// </summary>
+    public void SetVisible()
+    {
+        if(GameManager.Instance.CurrentPlayer == Owner)
+        {
+            foreach(KeyValuePair<Vector2, GridSlot> x in SlotList)
+            {
+                x.Value.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<Vector2, GridSlot> x in SlotList)
+            {
+                x.Value.gameObject.SetActive(false);
+            }
+        }
+
+    }
+
+    public void PopulateGrid(List<CelestialBody> population)
+    {
+        GridSlot[] slots = new GridSlot[SlotList.Count];
+        SlotList.Values.CopyTo(slots, 0);
+        int index = 0;
+        foreach (CelestialBody x in population)
+        {
+            slots[index].Body = x;
+            index++;
+        }
     }
 }

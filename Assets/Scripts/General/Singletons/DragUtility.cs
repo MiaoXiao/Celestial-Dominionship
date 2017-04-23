@@ -50,8 +50,12 @@ public class DragUtility : Singleton<DragUtility>
         SoundManager.Instance.PlayAudioSource(StartDragItemSound);
 
         LastLocation = card.transform.position;
-        dragging = true;
-        StartCoroutine(Drag(card));
+        LastParent = card.transform.parent.parent.gameObject;
+        if (!LastParent.transform.parent.GetComponent<Grid>().Locked)
+        {
+            dragging = true;
+            StartCoroutine(Drag(card));
+        }        
         //LastContainer = card.transform.parent.parent.parent.GetComponent<GridContainer>();
 
        // card.transform.SetParent(UIController.Instance.transform, true);
@@ -92,6 +96,7 @@ public class DragUtility : Singleton<DragUtility>
         card.transform.position = LastLocation;
         card.transform.SetParent(Temp.transform);
         Temp.transform.SetParent(LastParent.transform, true);
+        LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
         
     }
 

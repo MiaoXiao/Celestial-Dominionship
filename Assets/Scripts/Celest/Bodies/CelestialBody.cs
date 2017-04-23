@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public bool isLocked = false;
-    public bool inShop = true;
     public Player owner = null;
 
     protected abstract Celest GetCelest();

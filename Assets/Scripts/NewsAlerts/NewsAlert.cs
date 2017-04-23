@@ -26,6 +26,18 @@ public class NewsAlert : MonoBehaviour {
         StartCoroutine("WaitAndSpawn");
     }
 
+    public float i = 0;
+
+    private void Update()
+    {
+        i += Time.deltaTime;
+        if (i > 3)
+        {
+            AddNewsAlert();
+            i = 0;
+        }
+    }
+
     private void CallNewsAlert()
     {
         GameObject temp = Instantiate(textBox, transform);

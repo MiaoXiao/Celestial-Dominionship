@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
                 _Dust = 0;
             else
                 _Dust = value;
-
+            Debug.Log(_Dust);
             //update ui here with UIController.Instance.UpdateUI()
             UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Dust").GetComponentInChildren<Text>(), _Dust.ToString());
         }

@@ -55,6 +55,7 @@ public class GameManager : Singleton<GameManager>
         CurrentPlayer = PlayerOne;
         OppositePlayer = PlayerTwo;
         State = new SunState();
+        UpdateUI();
         //PopulateShop();
     }
 
@@ -90,6 +91,7 @@ public class GameManager : Singleton<GameManager>
             }
             State = new SwitchPlayerState();
         }
+        UpdateUI();
     }
 
     public void WinGame(Player winner)
@@ -102,6 +104,13 @@ public class GameManager : Singleton<GameManager>
         //Shop = Instantiate<Grid>(Shop);
         //Shop.ReInitGrid(new Vector2(2, 8));
         //Shop.PopulateGrid(planet, new Vector2(1, 1));
+    }
+    private void UpdateUI()
+    {
+        CurrentPlayer.Dust += 0;
+        CurrentPlayer.Buys += 0;
+        CurrentPlayer.cardDraw += 0;
+        CurrentPlayer.UpdateDecksizeUI();
     }
 
 

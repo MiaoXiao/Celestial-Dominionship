@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager>
         rotate1 = Player1Cam.transform.rotation;
         rotate2 = Player2Cam.transform.rotation;
         State = new SunState();
+        PlayerTwo.Hand.gameObject.SetActive(false);
         UpdateUI();
         //PopulateShop();
     }
@@ -76,14 +77,18 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
-                Player1Cam.transform.position = new Vector3(0f, 65.9f, 130f);
+                PlayerTwo.Hand.gameObject.SetActive(true);
+                PlayerOne.Hand.gameObject.SetActive(false);
+                Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
                 Player1Cam.transform.rotation = rotate2;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
-                Player1Cam.transform.position = new Vector3(0f, 65.9f, -45.8f);
+                PlayerTwo.Hand.gameObject.SetActive(false);
+                PlayerOne.Hand.gameObject.SetActive(true);
+                Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
                 Player1Cam.transform.rotation = rotate1;
                 State = new InitGameState();
             }
@@ -96,14 +101,18 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
-                Player1Cam.transform.position = new Vector3(0f, 65.9f, 130f);
+                PlayerTwo.Hand.gameObject.SetActive(true);
+                PlayerOne.Hand.gameObject.SetActive(false);
+                Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
                 Player1Cam.transform.rotation = rotate2;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
-                Player1Cam.transform.position = new Vector3(0f, 65.9f, -45.8f);
+                PlayerTwo.Hand.gameObject.SetActive(false);
+                PlayerOne.Hand.gameObject.SetActive(true);
+                Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
                 Player1Cam.transform.rotation = rotate1;
             }
             State = new SwitchPlayerState();

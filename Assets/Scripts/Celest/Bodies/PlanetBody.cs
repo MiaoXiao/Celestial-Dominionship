@@ -112,6 +112,7 @@ public class PlanetBody : DestroyableBody
     //When the planet dies
     public void OnDeath()
     {
+        print("Planet died");
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
             if (x.currentType == PSType.OnDestroy)

@@ -6,18 +6,14 @@ public class Activate : Singleton<Activate>
 {
     Player CurrentPlayer;
 
+    private void Awake()
+    {
+        CurrentPlayer = GameManager.Instance.CurrentPlayer;
+    }
+
     public void ActivatePlanetEffect(PlanetSpecial effect, Player Owner)
     {
-        //Check which player is going to recieve the effect
-        if (!effect.affectsUser)
-        {
-            if (GameManager.Instance.CurrentPlayer == Owner)
-                CurrentPlayer = GameManager.Instance.OppositePlayer;
-            else
-                CurrentPlayer = Owner;
-        }
-        else
-            CurrentPlayer = Owner;
+
 
         //Do the effect
         switch (effect.currentEffect)
@@ -40,16 +36,6 @@ public class Activate : Singleton<Activate>
 
     public void ActivateSpecialEffect(Special effect, Player Owner)
     {
-        //Check which player is going to recieve the effect
-        if (!effect.affectsUser)
-        {
-            if (GameManager.Instance.CurrentPlayer == Owner)
-                CurrentPlayer = GameManager.Instance.OppositePlayer;
-            else
-                CurrentPlayer = Owner;
-        }
-        else
-            CurrentPlayer = Owner;
 
         //Do the effect
         switch (effect.currentEffect)
@@ -71,6 +57,7 @@ public class Activate : Singleton<Activate>
 
     public void Dust(int val)
     {
+        print("increase by " + val);
         if (CurrentPlayer != null)
             CurrentPlayer.Dust += val;
     }

@@ -88,7 +88,11 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        if(this is DustBody || this is SpecialBody)
+        {
+            owner.Discard.PopulateGrid(this);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
             DragUtility.Instance.EndDrag(this.gameObject);
     }
 

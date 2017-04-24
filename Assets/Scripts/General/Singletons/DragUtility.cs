@@ -52,6 +52,7 @@ public class DragUtility : Singleton<DragUtility>
         OriginalLoc = card.transform.position;
         LastLocation = card.transform.position;
         LastParent = card.transform.parent.parent.gameObject;
+        LastParent.GetComponent<GridSlot>().Body = null;
         if (!LastParent.transform.parent.parent.GetComponent<Grid>().Locked)
         {
             dragging = true;
@@ -107,6 +108,7 @@ public class DragUtility : Singleton<DragUtility>
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
             LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+            card.GetComponent<CelestialBody>().isLocked = LastParent.GetComponent<GridSlot>().mygrid.Locked;
         }
         else
         {
@@ -115,18 +117,19 @@ public class DragUtility : Singleton<DragUtility>
         
     }
 
-    public void EndDrag(GameObject card, GameObject LastParent)
+    public void EndDrag(GameObject card, GameObject SetParent)
     {
-        if (LastParent.GetComponent<GridSlot>().Body == null)
+        dragging = false;
+        if (SetParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();
-            LastLocation = LastParent.transform.position;
+            LastLocation = SetParent.transform.position;
             LastLocation.y += 3;
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
-            Temp.transform.SetParent(LastParent.transform, true);
-            LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
-            card.GetComponent<CelestialBody>().isLocked = LastParent.GetComponent<GridSlot>().mygrid.Locked;
+            Temp.transform.SetParent(SetParent.transform, true);
+            SetParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
+            card.GetComponent<CelestialBody>().isLocked = SetParent.GetComponent<GridSlot>().mygrid.Locked;
         }
         else
         {

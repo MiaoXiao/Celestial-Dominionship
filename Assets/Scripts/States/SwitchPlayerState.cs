@@ -9,11 +9,11 @@ public class SwitchPlayerState : GameState
     {
         Debug.Log("Switching Sides...");
         GameManager.Instance.currState = States.Switch;
-        GameManager.Instance.SwitchTurn();
+        GameManager.Instance.State = new DrawState();
     }
 
     public override void OnStateExit()
     {
-        throw new NotImplementedException();
+        
     }
 }

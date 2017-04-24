@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum States {Buy, Draw, Init, Switch, Play}
+public enum States {Buy, Draw, Init, Switch, Play, Sun}
 
 public class GameManager : Singleton<GameManager>
 {
     private GameState _State;
+    public CelestialBody tempDust;
+    public CelestialBody sun;
     public States currState;
     [SerializeField]
     private Grid Shop;
@@ -50,22 +52,39 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentPlayer = PlayerOne;
         OppositePlayer = PlayerTwo;
-        State = new InitGameState();
+        State = new SunState();
         //PopulateShop();
     }
 
     public void SwitchTurn()
     {
-        State = new SwitchPlayerState();
-        if (CurrentPlayer == PlayerOne)
+        if (currState.Equals(States.Sun))
         {
-            CurrentPlayer = PlayerTwo;
-            OppositePlayer = PlayerOne;
+            if (CurrentPlayer == PlayerOne)
+            {
+                CurrentPlayer = PlayerTwo;
+                OppositePlayer = PlayerOne;
+            }
+            else
+            {
+                CurrentPlayer = PlayerOne;
+                OppositePlayer = PlayerTwo;
+                State = new InitGameState();
+            }
         }
         else
         {
-            CurrentPlayer = PlayerOne;
-            OppositePlayer = PlayerTwo;
+            State = new SwitchPlayerState();
+            if (CurrentPlayer == PlayerOne)
+            {
+                CurrentPlayer = PlayerTwo;
+                OppositePlayer = PlayerOne;
+            }
+            else
+            {
+                CurrentPlayer = PlayerOne;
+                OppositePlayer = PlayerTwo;
+            }
         }
     }
 

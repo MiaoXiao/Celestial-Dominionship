@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     public List<CelestialBody> CurrentHand = new List<CelestialBody>();
     public List<CelestialBody> MainDeck = new List<CelestialBody>();
     public List<CelestialBody> DiscardDeck = new List<CelestialBody>();
-    public bool BuyEnable;
-    public bool PlayEnable;
     public Grid Field;
     public Grid Discard;
     public Grid Hand;
@@ -31,6 +29,7 @@ public class Player : MonoBehaviour
             //update ui here with UIController.Instance.UpdateUI()
         }
     }
+    private int BaseBuys = 1;
     private int _Buys = 1;
     public int Buys
     {
@@ -91,17 +90,14 @@ public class Player : MonoBehaviour
         int drawnCards = cards;
         while (drawnCards > 0)
         {
+            if (MainDeck.Count == 0)
+            {
+                RemakeDeck();
+            }
             CurrentHand.Add(MainDeck[0]);
             Hand.PopulateGrid(MainDeck[0]);
             MainDeck.RemoveAt(0);
             drawnCards--;
-
-            if (MainDeck.Count == 0)
-            {
-                RemakeDeck();
-                if (MainDeck.Count == 0)
-                    drawnCards = 0;
-            }
         }
     }
 
@@ -123,6 +119,10 @@ public class Player : MonoBehaviour
     /// </summary>
     public void EmptyHand()
     {
+        foreach(CelestialBody x in CurrentHand)
+        {
+            DiscardDeck.Add(x);
+        }
         CurrentHand.Clear();
     }
 
@@ -145,5 +145,8 @@ public class Player : MonoBehaviour
     {
 
     }
-
+    public void ResetBuys()
+    {
+        Buys = BaseBuys;
+    }
 }

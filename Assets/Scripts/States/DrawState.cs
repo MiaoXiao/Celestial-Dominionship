@@ -15,6 +15,7 @@ public class DrawState : GameState
 
     public override void OnStateExit()
     {
-        throw new NotImplementedException();
+        GameManager.Instance.CurrentPlayer.EmptyHand();
+        GameManager.Instance.CurrentPlayer.ResetBuys();
     }
 }

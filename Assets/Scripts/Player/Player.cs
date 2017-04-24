@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     public Grid Field;
     public Grid Discard;
     public Grid Hand;
+
+    private GameObject PrimaryDisplay = null;
 
     private int _Dust = 0;
     public int Dust
@@ -27,9 +30,25 @@ public class Player : MonoBehaviour
                 _Dust = value;
 
             //update ui here with UIController.Instance.UpdateUI()
+            UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Dust").GetComponentInChildren<Text>(), _Dust.ToString());
         }
     }
-    private int BaseBuys = 1;
+    private int _BaseBuys = 1;
+    private int BaseBuys
+    {
+        get { return _BaseBuys; }
+        set
+        {
+            if (value < 1)
+                _BaseBuys = 1;
+            else
+                _BaseBuys = value;
+
+            //update ui here with UIController.Instance.UpdateUI()
+            UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Wormholes").GetComponentInChildren<Text>(), Buys.ToString() + "/" + _BaseBuys.ToString());
+        }
+    }
+    
     private int _Buys = 1;
     public int Buys
     {
@@ -45,6 +64,7 @@ public class Player : MonoBehaviour
                 _Buys = value;
 
             //update ui here with UIController.Instance.UpdateUI()
+            UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Wormholes").GetComponentInChildren<Text>(), _Buys.ToString() + "/" + BaseBuys.ToString());
         }
     }
     private int _cardDraw = 5;
@@ -62,6 +82,7 @@ public class Player : MonoBehaviour
                 _cardDraw = value;
 
             //update ui here with UIController.Instance.UpdateUI()
+            UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Transports").GetComponentInChildren<Text>(), _cardDraw.ToString());
         }
     }
 
@@ -81,6 +102,13 @@ public class Player : MonoBehaviour
     public delegate void Passives();
     public Passives perTick;
 
+    private void Awake()
+    {
+        PrimaryDisplay = GameObject.FindGameObjectWithTag("Primary UI");
+        if (PrimaryDisplay == null)
+            throw new System.Exception("Please place Primary UI into the Main Canvas.");
+    }
+
     /// <summary>
     /// Draw specified number of cards into your hand up until your card draw.
     /// Shuffle discard back into Main deck if neccesary
@@ -99,6 +127,8 @@ public class Player : MonoBehaviour
             MainDeck.RemoveAt(0);
             drawnCards--;
         }
+
+        UpdateDecksizeUI();
     }
 
     /// <summary>
@@ -112,6 +142,7 @@ public class Player : MonoBehaviour
         MainDeck = new List<CelestialBody>(DiscardDeck);
         DeckShuffle(ref MainDeck);
 
+        UpdateDecksizeUI();
     }
 
     /// <summary>
@@ -124,6 +155,8 @@ public class Player : MonoBehaviour
             DiscardDeck.Add(x);
         }
         CurrentHand.Clear();
+
+        UpdateDecksizeUI();
     }
 
     /// <summary>
@@ -148,5 +181,11 @@ public class Player : MonoBehaviour
     public void ResetBuys()
     {
         Buys = BaseBuys;
+    }
+
+    public void UpdateDecksizeUI()
+    {
+        UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Universe").GetComponentInChildren<Text>(), MainDeck.Count.ToString());
+        UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Void").GetComponentInChildren<Text>(), DiscardDeck.Count.ToString());
     }
 }

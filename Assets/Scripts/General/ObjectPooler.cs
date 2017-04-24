@@ -57,10 +57,13 @@ public class ObjectPooler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < NumberOfCopies; ++i)
+        if (ObjToPool != null)
         {
-            GameObject new_obj = AddObjToPool();
-            new_obj.SetActive(false);
+            for (int i = 0; i < NumberOfCopies; ++i)
+            {
+                GameObject new_obj = AddObjToPool();
+                new_obj.SetActive(false);
+            }
         }
     }
 

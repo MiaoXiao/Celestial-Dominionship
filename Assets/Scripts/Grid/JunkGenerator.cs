@@ -9,17 +9,12 @@ public class JunkGenerator : MonoBehaviour
 
     private Grid GridRef = null;
 
-    [SerializeField]
-    private ObjectPooler JunkPooler = null;
-
     private void Awake()
     {
         GridRef = GetComponent<Grid>();
         if (GridRef == null)
             throw new System.Exception("Junk Generator needs to be attached along with a Grid");
 
-        if (JunkPooler == null)
-            throw new System.Exception("Attach Junk pooler reference to Junk Generator");
     }
 
     private void Start()
@@ -51,7 +46,7 @@ public class JunkGenerator : MonoBehaviour
         for (int i = 0; i < junk; ++i)
         {
             int rand_index = Random.Range(0, (int)(GridRef.Dimensions.x * GridRef.Dimensions.y) - i);
-            GameObject junk_obj = JunkPooler.RetrieveCopy();
+            GameObject junk_obj = ObjectPoolerManager.Instance.GetPooler["Earth"].RetrieveCopy();
             GridRef.PopulateGrid(junk_obj.GetComponent<CelestialBody>(), existing_pos[rand_index]);
             existing_pos.RemoveAt(rand_index);
         }

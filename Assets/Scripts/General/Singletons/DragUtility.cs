@@ -98,8 +98,6 @@ public class DragUtility : Singleton<DragUtility>
 
         SoundManager.Instance.PlayAudioSource(EndDragItemSound);
 
-        //Current lowest distance between grid and currently held card
-        float lowest_distance = MinimumDragDistance;
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();

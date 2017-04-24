@@ -35,9 +35,11 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private GameObject EndGameScreen = null;
-
+    
     public Player CurrentPlayer { get; private set; }
+    
     public Player OppositePlayer { get; private set; }
+    
     private GameObject UITabReference;
 
     private void Awake()
@@ -74,7 +76,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            State = new SwitchPlayerState();
+            GameManager.Instance.CurrentPlayer.EmptyHand();
+            GameManager.Instance.CurrentPlayer.ResetBuys();
             if (CurrentPlayer == PlayerOne)
             {
                 CurrentPlayer = PlayerTwo;
@@ -85,6 +88,7 @@ public class GameManager : Singleton<GameManager>
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
             }
+            State = new SwitchPlayerState();
         }
     }
 

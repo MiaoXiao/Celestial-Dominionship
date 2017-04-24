@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
             return;
 
         MainDeck = new List<CelestialBody>(DiscardDeck);
+        DiscardDeck = new List<CelestialBody>();
         DeckShuffle(ref MainDeck);
 
         UpdateDecksizeUI();

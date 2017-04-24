@@ -23,7 +23,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     /// <summary>
     /// How far away tooltip corner is from the mouse cursor
     /// </summary>
-    public float TooltipOffset = 100;
+    public float TooltipOffset = 50;
 
     private Vector3 LastToolTipPosition;
 
@@ -145,14 +145,14 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     if (Input.mousePosition.x < Screen.width / 2)
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2,
-                            Input.mousePosition.y + tooltip_rect.rect.height / 2);
+                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2 + TooltipOffset,
+                            Input.mousePosition.y + tooltip_rect.rect.height / 2 + TooltipOffset);
                     }
                     else
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2,
-                            Input.mousePosition.y + tooltip_rect.rect.height / 2);
+                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2 - TooltipOffset,
+                            Input.mousePosition.y + tooltip_rect.rect.height / 2 + TooltipOffset);
                     }
 
                 }
@@ -161,14 +161,14 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     if (Input.mousePosition.x < Screen.width / 2)
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2,
-                            Input.mousePosition.y - tooltip_rect.rect.height / 2);
+                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2 + TooltipOffset,
+                            Input.mousePosition.y - tooltip_rect.rect.height / 2 - TooltipOffset);
                     }
                     else
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2,
-                            Input.mousePosition.y - tooltip_rect.rect.height / 2);
+                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2 - TooltipOffset,
+                            Input.mousePosition.y - tooltip_rect.rect.height / 2 - TooltipOffset);
                     }
                 }
                 LastToolTipPosition = Input.mousePosition;

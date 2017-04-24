@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
         while (drawnCards > 0)
         {
             CurrentHand.Add(MainDeck[0]);
+            Hand.PopulateGrid(MainDeck[0]);
             MainDeck.RemoveAt(0);
             drawnCards--;
 

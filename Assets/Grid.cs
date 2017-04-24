@@ -163,13 +163,19 @@ public class Grid : MonoBehaviour
 
     public void PopulateGrid(CelestialBody body, Vector2 Loc)
     {
-        body = Instantiate<CelestialBody>(body);
+        //body = Instantiate<CelestialBody>(body);
         DragUtility.Instance.EndDrag(body.gameObject,SlotList[Loc].gameObject);
     }
+
     public void PopulateGrid(CelestialBody body)
     {
         CelestialBody bodyHolder = body;
-        for (int i = 0; i < body.GetCelest().numOfCopies; i++)
+        int copies = 1;
+        if(body.owner == null)
+        {
+            copies = body.GetCelest().numOfCopies;
+        }
+        for (int i = 0; i < copies; i++)
         {
             Vector2 Loc = new Vector2();
             for (int x = 0; x < SlotList.Count; x++)
@@ -182,15 +188,16 @@ public class Grid : MonoBehaviour
                 }
             }
             //Activate to remove them from shop
-            
-            if(i + 1 == body.GetCelest().numOfCopies){
+            Debug.Log("Move to disxard");
+            if (i + 1 < copies)
+            {
+                body = Instantiate<CelestialBody>(bodyHolder);
+                DragUtility.Instance.EndDrag(body.gameObject, SlotList[Loc].gameObject);
+            }
+            else
+            {
                 DragUtility.Instance.EndDrag(bodyHolder.gameObject, SlotList[Loc].gameObject);
-                break;
             }
-           
-            //Items stay in shop
-            body = Instantiate<CelestialBody>(body);
-            DragUtility.Instance.EndDrag(body.gameObject, SlotList[Loc].gameObject);
-            }
+        }
     }
 }

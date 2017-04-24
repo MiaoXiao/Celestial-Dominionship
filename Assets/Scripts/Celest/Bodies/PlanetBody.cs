@@ -49,7 +49,7 @@ public class PlanetBody : DestroyableBody
     //Will be called every time the planet is hit
     public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
-        print("PLANET HIT");
+        print("PLANET HIT by " + collision.name);
 
         foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {

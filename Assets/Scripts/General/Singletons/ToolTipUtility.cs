@@ -23,7 +23,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     /// <summary>
     /// How far away tooltip corner is from the mouse cursor
     /// </summary>
-    public float TooltipOffset = 20;
+    public float TooltipOffset = 100;
 
     private Vector3 LastToolTipPosition;
 
@@ -93,7 +93,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     else if (celest_body is CometBody || celest_body is PlanetBody)
                         element.text = "[Drag to your Galaxy to place this Celestial]";
                     else if (celest_body is SpecialBody)
-                        element.text = "[Drag outside to use this effect]";
+                        element.text = "[Left Click to use this effect]";
                     break;
                 default:
                     throw new System.Exception("Could not find usage text.");
@@ -122,14 +122,14 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     if (Input.mousePosition.x < Screen.width / 2)
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width * UIController.Instance.CanvasScalar / 2 + TooltipOffset,
-                            Input.mousePosition.y + UIController.Instance.CanvasScalar * tooltip_rect.rect.height / 2 + TooltipOffset);
+                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2,
+                            Input.mousePosition.y + tooltip_rect.rect.height / 2);
                     }
                     else
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width * UIController.Instance.CanvasScalar / 2 - TooltipOffset,
-                            Input.mousePosition.y + UIController.Instance.CanvasScalar * tooltip_rect.rect.height / 2 + TooltipOffset);
+                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2,
+                            Input.mousePosition.y + tooltip_rect.rect.height / 2);
                     }
 
                 }
@@ -138,14 +138,14 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     if (Input.mousePosition.x < Screen.width / 2)
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width * UIController.Instance.CanvasScalar / 2 + TooltipOffset,
-                            Input.mousePosition.y - UIController.Instance.CanvasScalar * tooltip_rect.rect.height / 2 - TooltipOffset);
+                            new Vector2(Input.mousePosition.x + tooltip_rect.rect.width / 2,
+                            Input.mousePosition.y - tooltip_rect.rect.height / 2);
                     }
                     else
                     {
                         tooltip_rect.position =
-                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width * UIController.Instance.CanvasScalar / 2 - TooltipOffset,
-                            Input.mousePosition.y - UIController.Instance.CanvasScalar * tooltip_rect.rect.height / 2 - TooltipOffset);
+                            new Vector2(Input.mousePosition.x - tooltip_rect.rect.width / 2,
+                            Input.mousePosition.y - tooltip_rect.rect.height / 2);
                     }
                 }
                 LastToolTipPosition = Input.mousePosition;

@@ -168,7 +168,7 @@ public class Grid : MonoBehaviour
     }
     public void PopulateGrid(CelestialBody body)
     {
-        Vector2 Loc;
+        Vector2 Loc = Vector2.zero;
         for(int x = 0;x < SlotList.Count; x++)
         {
             Vector2 temp = new Vector2(x % Dimensions.x, (int)(x / Dimensions.x));

@@ -66,6 +66,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private int _sunsLeft = 3;
+    public int sunsLeft
+    {
+        get { return _sunsLeft; }
+        set
+        {
+            _sunsLeft = value;
+            if (sunsLeft <= 0)
+                GameManager.Instance.WinGame(GameManager.Instance.OppositePlayer);
+                
+        }
+    }
+
     public delegate void Passives();
     public Passives perTick;
 

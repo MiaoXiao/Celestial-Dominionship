@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum States {Buy, Draw, Init, Switch, Play}
 
@@ -30,9 +31,20 @@ public class GameManager : Singleton<GameManager>
     public Player PlayerOne;
     public Player PlayerTwo;
 
+    [SerializeField]
+    private GameObject EndGameScreen = null;
+
     public Player CurrentPlayer { get; private set; }
     public Player OppositePlayer { get; private set; }
     private GameObject UITabReference;
+
+    private void Awake()
+    {
+        if (EndGameScreen == null)
+            throw new System.Exception("Please attach End Game Screen reference in Game Manager.");
+
+        EndGameScreen.SetActive(false);
+    }
 
     private void Start()
     {
@@ -55,8 +67,13 @@ public class GameManager : Singleton<GameManager>
             CurrentPlayer = PlayerOne;
             OppositePlayer = PlayerTwo;
         }
-
     }
+
+    public void WinGame(Player winner)
+    {
+        UIController.Instance.UpdateUI(EndGameScreen.transform.FindChild("Title").GetComponent<Text>(), winner.name + " wins!");
+    }
+
     public void PopulateShop()
     {
         //Shop = Instantiate<Grid>(Shop);

@@ -22,6 +22,8 @@ public class GridSlot : MonoBehaviour, IPointerEnterHandler, IPointerUpHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        DragUtility.Instance.LocationException = transform;
+        DragUtility.Instance.GridSlotException = this;
         if (Body == null)
         {
             DragUtility.Instance.LastLocation = this.transform.position;

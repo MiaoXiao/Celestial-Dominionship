@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Grid Discard;
     public Grid Hand;
 
+    public Vector2 FiringDirection = Vector2.up;
+
     private GameObject PrimaryDisplay = null;
 
     private int _Dust = 0;

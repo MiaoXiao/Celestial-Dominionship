@@ -20,6 +20,28 @@ public class DustBody : CelestialBody
         return DustRef;
     }
 
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        if (isLocked)
+            return;
+
+        //Debug.Log("Hit");
+        if (owner == null)
+        {
+            Buy();
+            return;
+        }
+        Play();
+        owner.Discard.PopulateGrid(this);
+        
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+
+        return;
+
+    }
 
     //When the object is hit on the grid
     public override void OnHit(Collider collision, MeteorBody meteor_body)

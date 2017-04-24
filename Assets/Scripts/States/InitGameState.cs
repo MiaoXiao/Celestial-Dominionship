@@ -22,7 +22,7 @@ public class InitGameState : GameState
         }
         for(int x = 0; x < 2; x++)
         {
-            CometBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CometBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = current_player;
             current_player.MainDeck.Add(meteor);
             current_player.Discard.PopulateGrid(meteor);
@@ -30,7 +30,7 @@ public class InitGameState : GameState
         for (int x = 0; x < 3; x++)
         {
             //Switch to object pooler
-            DustBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<DustBody>();
+            CelestialBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<CelestialBody>();
             dust.owner = other_player;
             other_player.MainDeck.Add(dust);
             other_player.Discard.PopulateGrid(dust);
@@ -38,7 +38,7 @@ public class InitGameState : GameState
         for (int x = 0; x < 2; x++)
         {
             //Switch to object pooler
-            CometBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CometBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = other_player;
             other_player.MainDeck.Add(meteor);
             other_player.Discard.PopulateGrid(meteor);

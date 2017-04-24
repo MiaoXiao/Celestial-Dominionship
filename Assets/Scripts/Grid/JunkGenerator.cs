@@ -46,7 +46,7 @@ public class JunkGenerator : MonoBehaviour
         for (int i = 0; i < junk; ++i)
         {
             int rand_index = Random.Range(0, (int)(GridRef.Dimensions.x * GridRef.Dimensions.y) - i);
-            GameObject junk_obj = ObjectPoolerManager.Instance.GetPooler["Earth"].RetrieveCopy();
+            GameObject junk_obj = ObjectPoolerManager.Instance.GetPooler["Junk"].RetrieveCopy();
             GridRef.PopulateGrid(junk_obj.GetComponent<CelestialBody>(), existing_pos[rand_index]);
             existing_pos.RemoveAt(rand_index);
         }

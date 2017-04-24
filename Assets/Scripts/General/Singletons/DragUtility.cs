@@ -101,7 +101,7 @@ public class DragUtility : Singleton<DragUtility>
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();
-            LastLocation.y += 3;
+            LastLocation.y += 1;
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
@@ -112,7 +112,25 @@ public class DragUtility : Singleton<DragUtility>
         {
             card.transform.position = OriginalLoc;
         }
-        
+
+        if (card.tag == "Sun" && card.GetComponent<CelestialBody>().isLocked)
+            GameManager.Instance.NextTurnButton.interactable = true;
+
+    }
+    public Transform LocationException;
+    public GridSlot GridSlotException;
+    public void EndDragForce(GameObject card)
+    {
+        if (!dragging)
+        {
+            return;
+        }
+        dragging = false;
+
+        SoundManager.Instance.PlayAudioSource(EndDragItemSound);
+        card.transform.SetParent(LocationException.transform);
+        card.transform.position = LocationException.transform.position;
+
     }
 
     public void EndDrag(GameObject card, GameObject SetParent)

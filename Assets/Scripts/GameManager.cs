@@ -42,7 +42,9 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private GameObject EndGameScreen = null;
-    
+
+    public Button NextTurnButton = null;
+
     public Player CurrentPlayer { get; private set; }
     
     public Player OppositePlayer { get; private set; }
@@ -79,8 +81,9 @@ public class GameManager : Singleton<GameManager>
                 OppositePlayer = PlayerOne;
                 PlayerTwo.Hand.gameObject.SetActive(true);
                 PlayerOne.Hand.gameObject.SetActive(false);
-                Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
-                Player1Cam.transform.rotation = rotate2;
+                //Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
+                // Player1Cam.transform.rotation = rotate2;
+                GameManager.Instance.NextTurnButton.interactable = false;
             }
             else
             {
@@ -88,8 +91,8 @@ public class GameManager : Singleton<GameManager>
                 OppositePlayer = PlayerTwo;
                 PlayerTwo.Hand.gameObject.SetActive(false);
                 PlayerOne.Hand.gameObject.SetActive(true);
-                Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
-                Player1Cam.transform.rotation = rotate1;
+               // Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
+                //Player1Cam.transform.rotation = rotate1;
                 State = new InitGameState();
             }
         }
@@ -103,8 +106,8 @@ public class GameManager : Singleton<GameManager>
                 OppositePlayer = PlayerOne;
                 PlayerTwo.Hand.gameObject.SetActive(true);
                 PlayerOne.Hand.gameObject.SetActive(false);
-                Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
-                Player1Cam.transform.rotation = rotate2;
+                //Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
+                //Player1Cam.transform.rotation = rotate2;
             }
             else
             {
@@ -112,8 +115,8 @@ public class GameManager : Singleton<GameManager>
                 OppositePlayer = PlayerTwo;
                 PlayerTwo.Hand.gameObject.SetActive(false);
                 PlayerOne.Hand.gameObject.SetActive(true);
-                Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
-                Player1Cam.transform.rotation = rotate1;
+                //Player1Cam.transform.position = new Vector3(0f, 46.4f, -36.6f);
+                //Player1Cam.transform.rotation = rotate1;
             }
             State = new SwitchPlayerState();
         }

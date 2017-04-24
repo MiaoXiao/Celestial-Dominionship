@@ -88,14 +88,14 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                 case "Usage":
                     if ((celest_body is CometBody || celest_body is AsteroidBody) && celest_body.isLocked)
                         element.text = "[Left Click to launch projectile]";
+                    else if (celest_body is CometBody || celest_body is PlanetBody && !celest_body.isLocked && celest_body.owner != null)
+                        element.text = "[Drag to your Galaxy to place this Celestial]";
+                    else if (celest_body is SpecialBody || celest_body is DustBody)
+                        element.text = "[Left Click to gain effect]";
+                    else if (celest_body is PlanetBody && celest_body.owner != null)
+                        element.text = "[Locked]";
                     else if (celest_body.owner == null)
                         element.text = "[Left Click to Purchase]";
-                    else if (celest_body is CometBody || celest_body is PlanetBody && !celest_body.isLocked)
-                        element.text = "[Drag to your Galaxy to place this Celestial]";
-                    else if (celest_body is SpecialBody)
-                        element.text = "[Left Click to use this effect]";
-                    else if (celest_body is PlanetBody)
-                        element.text = "[Locked]";
                     break;
                 default:
                     throw new System.Exception("Could not find usage text.");

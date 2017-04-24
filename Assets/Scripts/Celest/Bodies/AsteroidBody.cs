@@ -29,11 +29,22 @@ public class AsteroidBody : MeteorBody
         if (!Mover.isActive)
         {
             transform.position += new Vector3(0, 60f, 0);
+            GetComponent<Collider>().enabled = true;
             Mover.StartMovement(AsteroidRef.projectileSpeed, Vector3.down);
             Fired = true;
             StartDeathTimer(10f);
         }
     }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            DragUtility.Instance.EndDragForce(this.gameObject);
+            Play();
+        }
+    }
+
 
     public override void OnPointerDown(PointerEventData eventData)
     {

@@ -35,7 +35,7 @@ public abstract class MeteorBody: DestroyableBody
     {
         get
         {
-            return transform.parent.parent.GetComponent<GridSlot>();
+            return transform.parent.GetComponent<GridSlot>();
         }
     }
 
@@ -49,20 +49,25 @@ public abstract class MeteorBody: DestroyableBody
         if (radius <= 1)
             return;
 
+        print("radius");
+
         Grid grid = currentSlot.mygrid;
         Vector2 curr_pos = currentSlot.Position;
 
-        int min_x = Mathf.Clamp((int)curr_pos.x - radius - 1, 0, (int)grid.Dimensions.x - 1);
-        int max_x = Mathf.Clamp((int)curr_pos.x + radius - 1, 0, (int)grid.Dimensions.x - 1);
-        int min_y = Mathf.Clamp((int)curr_pos.y - radius - 1, 0, (int)grid.Dimensions.y - 1);
-        int max_y = Mathf.Clamp((int)curr_pos.y + radius - 1, 0, (int)grid.Dimensions.y - 1);
+        int min_x = Mathf.Clamp((int)curr_pos.x - radius + 1, 0, (int)grid.Dimensions.x);
+        int max_x = Mathf.Clamp((int)curr_pos.x + radius - 1, 0, (int)grid.Dimensions.x);
+        int min_y = Mathf.Clamp((int)curr_pos.y - radius + 1, 0, (int)grid.Dimensions.y);
+        int max_y = Mathf.Clamp((int)curr_pos.y + radius - 1, 0,  (int)grid.Dimensions.y);
 
-        for (int i = min_x; i < max_x; ++i)
+        //print(min_x + " " + max_x + " " + min_y + " " + max_y);
+
+        for (int i = min_x; i < max_x + 1; ++i)
         {
-            for (int j = min_y; j < max_y; ++j)
+            for (int j = min_y; j < max_y + 1; ++j)
             {
                 Vector2 checking = new Vector2(i, j);
-                if (grid.SlotList[checking].Body != null)
+                //Debug.Log("checking " + i + " " + j);
+                if (grid.SlotList.ContainsKey(checking) && grid.SlotList[checking].Body != null)
                     grid.SlotList[checking].Body.OnHit(gameObject.GetComponent<Collider>(), this);
             }
         }

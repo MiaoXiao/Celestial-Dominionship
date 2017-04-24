@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlanetBody : DestroyableBody
 {
@@ -17,6 +18,23 @@ public class PlanetBody : DestroyableBody
     public override Celest GetCelest()
     {
         return PlanetRef;
+    }
+
+    public virtual void OnPointerUp(PointerEventData eventData)
+    {
+        /*
+        if (this is DustBody || this is SpecialBody)
+        {
+            owner.Discard.PopulateGrid(this);
+            gameObject.GetComponent<Collider>().enabled = true;
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = true;
+            DragUtility.Instance.EndDrag(this.gameObject);
+        }
+        */
+
     }
 
     public override void Play()

@@ -137,6 +137,7 @@ public class NewsAlert : MonoBehaviour {
     public void AddEmergencyNewsAlert(string announcement, Color colour)
     {
         StopCoroutine("WaitAndSpawn");
+        //Debug.Log(GameObject.FindGameObjectsWithTag("NewsText").Length);
         foreach (GameObject gameobj in GameObject.FindGameObjectsWithTag("NewsText"))
         {
             Destroy(gameobj);

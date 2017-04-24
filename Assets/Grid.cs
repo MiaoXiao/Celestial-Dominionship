@@ -163,9 +163,10 @@ public class Grid : MonoBehaviour
 
     public void PopulateGrid(CelestialBody body, Vector2 Loc)
     {
-        body = Instantiate<CelestialBody>(body);
+        //body = Instantiate<CelestialBody>(body);
         DragUtility.Instance.EndDrag(body.gameObject,SlotList[Loc].gameObject);
     }
+
     public void PopulateGrid(CelestialBody body)
     {
         CelestialBody bodyHolder = body;

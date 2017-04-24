@@ -58,8 +58,7 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         if (curr_player == null)
             throw new Exception("Current player is null.");
 
-        if (curr_player.Dust < GetCelest().purchaseCost ||
-            curr_player.Buys <= 0)
+        if (curr_player.Dust < GetCelest().purchaseCost || curr_player.Buys <= 0)
         {
             Debug.Log("Insufficient Funds");
             return;
@@ -68,7 +67,7 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         curr_player.Dust -= GetCelest().purchaseCost;
         curr_player.Buys--;
         curr_player.DiscardDeck.Add(this);
-        //curr_player.
+        curr_player.Discard.PopulateGrid(this);
 
         //Add Discard animation
         //Move to object pooler

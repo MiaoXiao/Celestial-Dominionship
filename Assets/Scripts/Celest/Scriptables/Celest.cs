@@ -9,6 +9,8 @@ public abstract class Celest : ScriptableObject{
     public int playCost; // PRICE COST
     [SerializeField]
     public int purchaseCost;
+    [SerializeField]
+    public int numOfCopies = 1;
 
     public abstract string GetDescription();
 }

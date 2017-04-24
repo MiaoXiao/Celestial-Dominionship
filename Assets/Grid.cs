@@ -168,17 +168,34 @@ public class Grid : MonoBehaviour
     }
     public void PopulateGrid(CelestialBody body)
     {
+<<<<<<< Updated upstream
         Vector2 Loc = Vector2.zero;
         for(int x = 0;x < SlotList.Count; x++)
+=======
+        CelestialBody bodyHolder = body;
+        for (int i = 0; i < body.GetCelest().numOfCopies; i++)
+>>>>>>> Stashed changes
         {
-            Vector2 temp = new Vector2(x % Dimensions.x, (int)(x / Dimensions.x));
-            if(SlotList[temp].Body == null)
+            Vector2 Loc = new Vector2();
+            for (int x = 0; x < SlotList.Count; x++)
             {
-                Loc = temp;
+                Vector2 temp = new Vector2(x % Dimensions.x, (int)(x / Dimensions.x));
+                if (SlotList[temp].Body == null)
+                {
+                    Loc = temp;
+                    break;
+                }
+            }
+            //Activate to remove them from shop
+            
+            if(i + 1 == body.GetCelest().numOfCopies){
+                DragUtility.Instance.EndDrag(bodyHolder.gameObject, SlotList[Loc].gameObject);
                 break;
             }
-        }
-        body = Instantiate<CelestialBody>(body);
-        DragUtility.Instance.EndDrag(body.gameObject, SlotList[Loc].gameObject);
+           
+            //Items stay in shop
+            body = Instantiate<CelestialBody>(body);
+            DragUtility.Instance.EndDrag(body.gameObject, SlotList[Loc].gameObject);
+            }
     }
 }

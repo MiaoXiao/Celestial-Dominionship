@@ -107,6 +107,27 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     }
 
     /// <summary>
+    /// Show tooltip and pass in information
+    /// </summary>
+    public void ShowGeneralToolTip(string info)
+    {
+        Text[] list = AllTooltips["General"].transform.GetComponentsInChildren<Text>();
+
+        foreach (Text element in list)
+        {
+            switch (element.gameObject.name)
+            {
+                case "Info":
+                    element.text = info;
+                    break;
+            }
+        }
+        AllTooltips["General"].SetActive(true);
+        StartCoroutine("MoveToolTip", AllTooltips["General"]);
+    }
+
+
+    /// <summary>
     /// Move ToolTip
     /// </summary>
     /// <returns></returns>

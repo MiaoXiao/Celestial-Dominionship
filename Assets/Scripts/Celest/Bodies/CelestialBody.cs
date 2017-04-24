@@ -77,13 +77,17 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-            //Debug.Log("Hit");
-            if (owner == null)
-            {
-                Buy();
-            }
+        //Debug.Log("Hit");
+        if (owner == null)
+        {
+            Buy();
+        }
         else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
             DragUtility.Instance.StartDrag(this.gameObject);
+        }
+
     }
 
     public virtual void OnPointerUp(PointerEventData eventData)
@@ -93,7 +97,11 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
             owner.Discard.PopulateGrid(this);
         }
         else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = true;
             DragUtility.Instance.EndDrag(this.gameObject);
+        }
+
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)

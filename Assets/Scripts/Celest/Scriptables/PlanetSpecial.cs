@@ -28,7 +28,7 @@ public class PlanetSpecial
                 desc += "+" + value + " Wormholes.";
                 break;
             case PlanetEffect.CardDraw:
-                desc += "+" + value + " Warps.";
+                desc += "+" + value + " Transports.";
                 break;
             case PlanetEffect.GenerateMeteor:
                 desc += "Generate " + value + " meteor(s).";

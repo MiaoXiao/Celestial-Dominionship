@@ -121,6 +121,9 @@ public class GameManager : Singleton<GameManager>
             State = new SwitchPlayerState();
         }
         UpdateUI();
+
+        if (CurrentPlayer.perTick != null)
+            CurrentPlayer.perTick();
     }
 
     public void WinGame(Player winner)

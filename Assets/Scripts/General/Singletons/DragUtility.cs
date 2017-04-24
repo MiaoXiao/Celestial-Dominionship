@@ -88,11 +88,23 @@ public class DragUtility : Singleton<DragUtility>
         }
     }
 
-    public void EndDrag(GameObject card)
+    public void SendToOriginalLocation(GameObject card)
     {
         if (!dragging)
         {
             return;
+        }
+        dragging = false;
+
+        SoundManager.Instance.PlayAudioSource(EndDragItemSound);
+        card.transform.position = OriginalLoc;
+    }
+
+    public bool EndDrag(GameObject card)
+    {
+        if (!dragging)
+        {
+            return false;
         }
         dragging = false;
 
@@ -107,15 +119,17 @@ public class DragUtility : Singleton<DragUtility>
             Temp.transform.SetParent(LastParent.transform, true);
             LastParent.GetComponent<GridSlot>().Body = card.GetComponent<CelestialBody>();
             card.GetComponent<CelestialBody>().isLocked = LastParent.GetComponent<GridSlot>().mygrid.Locked;
+
+            if (card.tag == "Sun" && card.GetComponent<CelestialBody>().isLocked)
+                GameManager.Instance.NextTurnButton.interactable = true;
+
+            return true;
         }
         else
         {
             card.transform.position = OriginalLoc;
+            return false;
         }
-
-        if (card.tag == "Sun" && card.GetComponent<CelestialBody>().isLocked)
-            GameManager.Instance.NextTurnButton.interactable = true;
-
     }
     public Transform LocationException;
     public GridSlot GridSlotException;

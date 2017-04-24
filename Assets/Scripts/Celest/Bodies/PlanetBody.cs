@@ -20,27 +20,12 @@ public class PlanetBody : DestroyableBody
         return PlanetRef;
     }
 
-    public virtual void OnPointerUp(PointerEventData eventData)
-    {
-        /*
-        if (this is DustBody || this is SpecialBody)
-        {
-            owner.Discard.PopulateGrid(this);
-            gameObject.GetComponent<Collider>().enabled = true;
-        }
-        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
-        {
-            gameObject.GetComponent<Collider>().enabled = true;
-            DragUtility.Instance.EndDrag(this.gameObject);
-        }
-        */
-
-    }
-
     public override void Play()
     {
+        print("play planet");
+        GameManager.Instance.CurrentPlayer.Dust -= PlanetRef.playCost;
         //Check when the effect will be used
-        foreach(PlanetSpecial x in PlanetRef.PlanetEffects)
+        foreach (PlanetSpecial x in PlanetRef.PlanetEffects)
         {
             switch (x.currentType)
             {
@@ -82,6 +67,48 @@ public class PlanetBody : DestroyableBody
         }
 
     }
+
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        if (isLocked)
+            return;
+
+        //Debug.Log("Hit");
+        if (owner == null)
+        {
+            Buy();
+            return;
+        }
+
+        if (GameManager.Instance.CurrentPlayer.Dust < PlanetRef.playCost && gameObject.tag != "Sun")
+        {
+            return;
+        }
+
+        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+            DragUtility.Instance.StartDrag(this.gameObject);
+        }
+
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        if (GameManager.Instance.CurrentPlayer.Dust < PlanetRef.playCost && gameObject.tag != "Sun")
+        {
+            return;
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = true;
+            if (DragUtility.Instance.EndDrag(this.gameObject))
+                Play();
+        }
+
+    }
+
     //When the planet dies
     public void OnDeath()
     {

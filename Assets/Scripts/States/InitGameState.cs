@@ -22,7 +22,7 @@ public class InitGameState : GameState
         }
         for(int x = 0; x < 2; x++)
         {
-            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Earth"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = current_player;
             current_player.MainDeck.Add(meteor);
             current_player.Discard.PopulateGrid(meteor);
@@ -38,7 +38,7 @@ public class InitGameState : GameState
         for (int x = 0; x < 2; x++)
         {
             //Switch to object pooler
-            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Earth"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = other_player;
             other_player.MainDeck.Add(meteor);
             other_player.Discard.PopulateGrid(meteor);

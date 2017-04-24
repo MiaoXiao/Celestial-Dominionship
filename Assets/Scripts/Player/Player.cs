@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
             UIController.Instance.UpdateUI(PrimaryDisplay.transform.FindChild("Wormholes").GetComponentInChildren<Text>(), _Buys.ToString() + "/" + BaseBuys.ToString());
         }
     }
-    private int _cardDraw = 5;
+    private int _cardDraw = 3;
     public int cardDraw
     {
         get
@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
         {
             if (value < 0)
                 _cardDraw = 0;
+            else if (value > 8)
+                _cardDraw = 8;
             else
                 _cardDraw = value;
 

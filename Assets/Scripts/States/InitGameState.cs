@@ -11,22 +11,40 @@ public class InitGameState : GameState
         Debug.Log(GameManager.Instance.currState);
         Player current_player = GameManager.Instance.CurrentPlayer;
         Player other_player = GameManager.Instance.OppositePlayer;
-        for(int x = 0; x < 5; x++)
+        for(int x = 0; x < 3; x++)
         {
             //Switch to object pooler
+            //DustBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<DustBody>();
             CelestialBody dust = GameObject.Instantiate<CelestialBody>(GameManager.Instance.tempDust);
             dust.owner = current_player;
             current_player.MainDeck.Add(dust);
             current_player.Discard.PopulateGrid(dust);
         }
-        for (int x = 0; x < 5; x++)
+        for(int x = 0; x < 2; x++)
+        {
+            CometBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CometBody>();
+            meteor.owner = current_player;
+            current_player.MainDeck.Add(meteor);
+            current_player.Discard.PopulateGrid(meteor);
+        }
+        for (int x = 0; x < 3; x++)
         {
             //Switch to object pooler
-            CelestialBody dust = GameObject.Instantiate<CelestialBody>(GameManager.Instance.tempDust);
+            DustBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<DustBody>();
             dust.owner = other_player;
             other_player.MainDeck.Add(dust);
             other_player.Discard.PopulateGrid(dust);
         }
+        for (int x = 0; x < 2; x++)
+        {
+            //Switch to object pooler
+            CometBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CometBody>();
+            meteor.owner = other_player;
+            other_player.MainDeck.Add(meteor);
+            other_player.Discard.PopulateGrid(meteor);
+        }
+        current_player.DeckShuffle(ref current_player.MainDeck);
+        other_player.DeckShuffle(ref current_player.MainDeck);
         GameManager.Instance.State = new DrawState();
     }
 

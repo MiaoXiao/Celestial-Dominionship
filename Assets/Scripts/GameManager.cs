@@ -33,6 +33,10 @@ public class GameManager : Singleton<GameManager>
     public Player PlayerOne;
     public Player PlayerTwo;
 
+    public Camera Player1Cam;
+
+    public Camera Player2Cam;
+
     [SerializeField]
     private GameObject EndGameScreen = null;
     
@@ -67,11 +71,15 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
+                Player1Cam.GetComponent<Camera>().enabled = false;
+                Player2Cam.GetComponent<Camera>().enabled = true;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
+                Player1Cam.GetComponent<Camera>().enabled = true;
+                Player2Cam.GetComponent<Camera>().enabled = false;
                 State = new InitGameState();
             }
         }
@@ -83,11 +91,15 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
+                Player1Cam.GetComponent<Camera>().enabled = false;
+                Player2Cam.GetComponent<Camera>().enabled = true;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
+                Player1Cam.GetComponent<Camera>().enabled = true;
+                Player2Cam.GetComponent<Camera>().enabled = false;
             }
             State = new SwitchPlayerState();
         }

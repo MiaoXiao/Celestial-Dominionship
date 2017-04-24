@@ -95,6 +95,7 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         if(this is DustBody || this is SpecialBody)
         {
             owner.Discard.PopulateGrid(this);
+            gameObject.GetComponent<Collider>().enabled = true;
         }
         else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
         {

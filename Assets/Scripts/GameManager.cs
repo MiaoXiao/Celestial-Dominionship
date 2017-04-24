@@ -35,6 +35,9 @@ public class GameManager : Singleton<GameManager>
 
     public Camera Player1Cam;
 
+    private Quaternion rotate1;
+    private Quaternion rotate2;
+
     public Camera Player2Cam;
 
     [SerializeField]
@@ -58,6 +61,8 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentPlayer = PlayerOne;
         OppositePlayer = PlayerTwo;
+        rotate1 = Player1Cam.transform.rotation;
+        rotate2 = Player2Cam.transform.rotation;
         State = new SunState();
         UpdateUI();
         //PopulateShop();
@@ -71,15 +76,15 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
-                Player1Cam.GetComponent<Camera>().enabled = false;
-                Player2Cam.GetComponent<Camera>().enabled = true;
+                Player1Cam.transform.position = new Vector3(0f, 65.9f, 130f);
+                Player1Cam.transform.rotation = rotate2;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
-                Player1Cam.GetComponent<Camera>().enabled = true;
-                Player2Cam.GetComponent<Camera>().enabled = false;
+                Player1Cam.transform.position = new Vector3(0f, 65.9f, -45.8f);
+                Player1Cam.transform.rotation = rotate1;
                 State = new InitGameState();
             }
         }
@@ -91,15 +96,15 @@ public class GameManager : Singleton<GameManager>
             {
                 CurrentPlayer = PlayerTwo;
                 OppositePlayer = PlayerOne;
-                Player1Cam.GetComponent<Camera>().enabled = false;
-                Player2Cam.GetComponent<Camera>().enabled = true;
+                Player1Cam.transform.position = new Vector3(0f, 65.9f, 130f);
+                Player1Cam.transform.rotation = rotate2;
             }
             else
             {
                 CurrentPlayer = PlayerOne;
                 OppositePlayer = PlayerTwo;
-                Player1Cam.GetComponent<Camera>().enabled = true;
-                Player2Cam.GetComponent<Camera>().enabled = false;
+                Player1Cam.transform.position = new Vector3(0f, 65.9f, -45.8f);
+                Player1Cam.transform.rotation = rotate1;
             }
             State = new SwitchPlayerState();
         }

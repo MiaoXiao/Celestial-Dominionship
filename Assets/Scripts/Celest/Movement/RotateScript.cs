@@ -7,7 +7,7 @@ public class RotateScript : MonoBehaviour
 
     public float speed = 15f;
     public bool isActive;
-    public Vector3 direction = new Vector3(0, 1, 0);
+    public Vector3 direction;
 
     // Use this for initialization
     void Start()

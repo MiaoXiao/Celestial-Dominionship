@@ -5,19 +5,13 @@ using UnityEngine;
 public class RotateScript : MonoBehaviour
 {
 
-    public Transform gameTransform;
-
-    public float speed;
+    public float speed = 15f;
     public bool isActive;
-    public Vector3 direction;
-
-    private IEnumerator coroutine;
+    public Vector3 direction = new Vector3(0, 1, 0);
 
     // Use this for initialization
     void Start()
     {
-        gameTransform = gameObject.transform;
-        isActive = false;
         StartRotation();
     }
 
@@ -31,7 +25,7 @@ public class RotateScript : MonoBehaviour
     {
         while (isActive)
         {
-            gameTransform.Rotate(speed * direction * Time.deltaTime);
+            transform.Rotate(speed * direction * Time.deltaTime);
             yield return null;
         }
     }

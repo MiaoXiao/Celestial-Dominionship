@@ -102,7 +102,7 @@ public class DragUtility : Singleton<DragUtility>
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {
             Temp = new GameObject();
-            LastLocation.y += 4;
+            LastLocation.y += 3;
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);
@@ -121,7 +121,7 @@ public class DragUtility : Singleton<DragUtility>
         {
             Temp = new GameObject();
             LastLocation = LastParent.transform.position;
-            LastLocation.y += 4;
+            LastLocation.y += 3;
             card.transform.position = LastLocation;
             card.transform.SetParent(Temp.transform);
             Temp.transform.SetParent(LastParent.transform, true);

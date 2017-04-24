@@ -80,6 +80,11 @@ public class PlanetBody : DestroyableBody
 
         //TODO: need to disable this planet's passives here
 
+        if (gameObject.tag == "Sun")
+            owner.sunsLeft--;
+
+        owner = null;
+
         gameObject.SetActive(false);
     }
 

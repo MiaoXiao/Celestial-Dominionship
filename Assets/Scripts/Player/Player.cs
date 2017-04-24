@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
     //Note: when changing current hand, you also need to change the Grid associated with that hand
     public List<CelestialBody> CurrentHand = new List<CelestialBody>();
     public List<CelestialBody> MainDeck = new List<CelestialBody>();
-    public List<CelestialBody> Discard = new List<CelestialBody>();
+    public List<CelestialBody> DiscardDeck = new List<CelestialBody>();
     public bool BuyEnable;
     public bool PlayEnable;
-    //Grid Field;
+    public Grid Field;
+    public Grid Discard;
+    public Grid Hand;
 
     private int _Dust = 0;
     public int Dust
@@ -64,6 +66,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private int _sunsLeft = 3;
+    public int sunsLeft
+    {
+        get { return _sunsLeft; }
+        set
+        {
+            _sunsLeft = value;
+            if (sunsLeft <= 0)
+                GameManager.Instance.WinGame(GameManager.Instance.OppositePlayer);
+                
+        }
+    }
+
     public delegate void Passives();
     public Passives perTick;
 
@@ -97,7 +112,7 @@ public class Player : MonoBehaviour
         if (MainDeck.Count != 0)
             return;
 
-        MainDeck = new List<CelestialBody>(Discard);
+        MainDeck = new List<CelestialBody>(DiscardDeck);
         DeckShuffle(ref MainDeck);
 
     }

@@ -6,8 +6,8 @@ public class SunState : GameState {
         public override void OnStateEnter()
         {
         GameManager.Instance.currState = States.Sun;
-        CelestialBody sun1 = ObjectPoolerManager.Instance.GetPooler["Heart Planet"].RetrieveCopy().GetComponent<CelestialBody>();
-        CelestialBody sun2 = ObjectPoolerManager.Instance.GetPooler["Heart Planet"].RetrieveCopy().GetComponent<CelestialBody>();
+        CelestialBody sun1 = ObjectPoolerManager.Instance.GetPooler["Sun"].RetrieveCopy().GetComponent<CelestialBody>();
+        CelestialBody sun2 = ObjectPoolerManager.Instance.GetPooler["Sun"].RetrieveCopy().GetComponent<CelestialBody>();
         sun1.owner = GameManager.Instance.CurrentPlayer;
         sun2.owner = GameManager.Instance.OppositePlayer;
         GameManager.Instance.CurrentPlayer.Hand.PopulateGrid(sun1);

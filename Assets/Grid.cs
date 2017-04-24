@@ -169,6 +169,14 @@ public class Grid : MonoBehaviour
 
     public void PopulateGrid(CelestialBody body)
     {
+        if(body.transform.parent != null)
+        {
+            if(body.transform.parent.parent != null)
+            {
+                if(body.transform.parent.parent.GetComponent<GridSlot>() != null)
+                    body.transform.parent.parent.GetComponent<GridSlot>().Body = null;
+            }
+        }
         CelestialBody bodyHolder = body;
         int copies = 1;
         if(body.owner == null)

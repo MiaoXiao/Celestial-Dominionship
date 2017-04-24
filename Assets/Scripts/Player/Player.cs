@@ -122,9 +122,20 @@ public class Player : MonoBehaviour
             {
                 RemakeDeck();
             }
-            CurrentHand.Add(MainDeck[0]);
-            Hand.PopulateGrid(MainDeck[0]);
-            MainDeck.RemoveAt(0);
+            if (MainDeck[0] is PlanetBody || MainDeck[0] is MeteorBody)
+            {
+                DiscardDeck.Add(MainDeck[0]);
+                Discard.PopulateGrid(MainDeck[0]);
+                CelestialBody Temp = Instantiate<CelestialBody>(MainDeck[0]);
+                Hand.PopulateGrid(Temp);
+                MainDeck.RemoveAt(0);
+            }
+            else
+            {
+                CurrentHand.Add(MainDeck[0]);
+                Hand.PopulateGrid(MainDeck[0]);
+                MainDeck.RemoveAt(0);
+            }
             drawnCards--;
         }
 

@@ -23,7 +23,7 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
     /// <summary>
     /// How far away tooltip corner is from the mouse cursor
     /// </summary>
-    public float TooltipOffset = 50;
+    public float TooltipOffset = 150;
 
     private Vector3 LastToolTipPosition;
 
@@ -80,17 +80,17 @@ public class ToolTipUtility : Singleton<ToolTipUtility>
                     element.text = data.GetDescription();
                     break;
                 case "Purchase Cost":
-                    element.text = data.purchaseCost.ToString();
+                    element.text = "Buy Cost: " + data.purchaseCost.ToString();
                     break;
                 case "Use Cost":
-                    element.text = data.playCost.ToString();
+                    element.text = "Use Cost: " + data.playCost.ToString();
                     break;
                 case "Usage":
                     if ((celest_body is CometBody || celest_body is AsteroidBody) && celest_body.isLocked)
                         element.text = "[Left Click to launch projectile]";
-                    else if (celest_body is CometBody || celest_body is PlanetBody && !celest_body.isLocked && celest_body.owner != null)
+                    else if ((celest_body is CometBody || celest_body is PlanetBody) && !celest_body.isLocked && celest_body.owner != null)
                         element.text = "[Drag to your Galaxy to place this Celestial]";
-                    else if (celest_body is SpecialBody || celest_body is DustBody)
+                    else if (celest_body is SpecialBody || celest_body is DustBody && celest_body.owner != null)
                         element.text = "[Left Click to gain effect]";
                     else if (celest_body is PlanetBody && celest_body.owner != null)
                         element.text = "[Locked]";

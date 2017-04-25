@@ -25,7 +25,7 @@ public class RegisterButtonAudio : MonoBehaviour, IPointerEnterHandler, IPointer
         if (ButtonRef != null && !ButtonRef.interactable)
             return;
 
-        SoundManager.Instance.PlayAudioSource(ButtonEnter);
+        //SoundManager.Instance.PlayAudioSource(ButtonEnter);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -35,7 +35,7 @@ public class RegisterButtonAudio : MonoBehaviour, IPointerEnterHandler, IPointer
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            SoundManager.Instance.PlayAudioSource(ButtonClick);
+            //SoundManager.Instance.PlayAudioSource(ButtonClick);
         }
     }
 }

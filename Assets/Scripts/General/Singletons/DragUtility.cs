@@ -48,7 +48,7 @@ public class DragUtility : Singleton<DragUtility>
     public void StartDrag(GameObject card)
     {
 
-        SoundManager.Instance.PlayAudioSource(StartDragItemSound);
+        //SoundManager.Instance.PlayAudioSource(StartDragItemSound);
         OriginalLoc = card.transform.position;
         LastLocation = card.transform.position;
         LastParent = card.transform.parent.parent.gameObject;
@@ -68,7 +68,7 @@ public class DragUtility : Singleton<DragUtility>
     {
         while (dragging)
         {
-            Debug.Log("Drag");
+            //Debug.Log("Drag");
             Dragging(card);
             yield return null;
         }
@@ -96,7 +96,7 @@ public class DragUtility : Singleton<DragUtility>
         }
         dragging = false;
 
-        SoundManager.Instance.PlayAudioSource(EndDragItemSound);
+        //SoundManager.Instance.PlayAudioSource(EndDragItemSound);
         card.transform.position = OriginalLoc;
     }
 
@@ -108,7 +108,7 @@ public class DragUtility : Singleton<DragUtility>
         }
         dragging = false;
 
-        SoundManager.Instance.PlayAudioSource(EndDragItemSound);
+        //SoundManager.Instance.PlayAudioSource(EndDragItemSound);
 
         if (LastParent.GetComponent<GridSlot>().Body == null)
         {

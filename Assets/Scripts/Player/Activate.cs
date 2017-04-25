@@ -57,7 +57,7 @@ public class Activate : Singleton<Activate>
 
     public void Dust(int val)
     {
-        print("increase by " + val);
+        //print("increase by " + val);
         if (CurrentPlayer != null)
             CurrentPlayer.Dust += val;
     }

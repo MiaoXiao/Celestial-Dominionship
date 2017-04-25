@@ -31,16 +31,15 @@ public class DustBody : CelestialBody
             Buy();
             return;
         }
+
         Play();
-        owner.Discard.PopulateGrid(this);
+        
         
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-
         return;
-
     }
 
     //When the object is hit on the grid
@@ -51,6 +50,8 @@ public class DustBody : CelestialBody
 
     public override void Play()
     {
-        GameManager.Instance.CurrentPlayer.Dust += DustRef.value;
+        owner.Dust += DustRef.value;
+        ToolTipUtility.Instance.HideAllToolTips();
+        Destroy(gameObject);
     }
 }

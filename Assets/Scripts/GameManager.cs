@@ -75,6 +75,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (currState.Equals(States.Sun))
         {
+            //CurrentPlayer.BaseBuys = 0;
             if (CurrentPlayer == PlayerOne)
             {
                 CurrentPlayer = PlayerTwo;
@@ -84,6 +85,7 @@ public class GameManager : Singleton<GameManager>
                 //Player1Cam.transform.position = new Vector3(0f, 46.4f, 116f);
                 // Player1Cam.transform.rotation = rotate2;
                 GameManager.Instance.NextTurnButton.interactable = false;
+                
             }
             else
             {
@@ -128,6 +130,7 @@ public class GameManager : Singleton<GameManager>
 
     public void WinGame(Player winner)
     {
+        EndGameScreen.SetActive(true);
         UIController.Instance.UpdateUI(EndGameScreen.transform.FindChild("Title").GetComponent<Text>(), winner.name + " wins!");
     }
 

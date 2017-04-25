@@ -23,7 +23,7 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
         if (celestial_body == null)
             return;
 
-        print(name + " has trigger event with " + collision.name);
+        //print(name + " has trigger event with " + collision.name);
 
         if (celestial_body is MeteorBody)
             OnHit(collision, (MeteorBody)celestial_body);
@@ -66,8 +66,10 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
 
         curr_player.Dust -= GetCelest().purchaseCost;
         curr_player.Buys--;
+
         curr_player.DiscardDeck.Add(this);
-        curr_player.Discard.PopulateGrid(this);
+        GetComponent<Collider>().enabled = false;
+        this.transform.position = curr_player.DiscardArea;
 
         //Add Discard animation
         //Move to object pooler
@@ -86,7 +88,6 @@ public abstract class CelestialBody : MonoBehaviour, IPointerDownHandler, IPoint
             Buy();
             return;
         }
-
         else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
         {
             gameObject.GetComponent<Collider>().enabled = false;

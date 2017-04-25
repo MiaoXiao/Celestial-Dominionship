@@ -59,7 +59,10 @@ public class PlanetBody : DestroyableBody
             if (x.currentType == PSType.OnHit)
                 Activate.Instance.ActivatePlanetEffect(x, owner);
         }
-        
+
+        if (meteor_body == null)
+            return;
+
         PlanetRef.population -= meteor_body.GetMeteor().damage;
         if(PlanetRef.population <= 0)
         {
@@ -85,7 +88,7 @@ public class PlanetBody : DestroyableBody
             return;
         }
 
-        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
         {
             gameObject.GetComponent<Collider>().enabled = false;
             DragUtility.Instance.StartDrag(this.gameObject);
@@ -103,8 +106,11 @@ public class PlanetBody : DestroyableBody
         if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
         {
             gameObject.GetComponent<Collider>().enabled = true;
-            if (DragUtility.Instance.EndDrag(this.gameObject))
+            if (DragUtility.Instance.EndDrag(this.gameObject) && isLocked)
+            {
                 Play();
+            }
+               
         }
 
     }
@@ -127,11 +133,14 @@ public class PlanetBody : DestroyableBody
         //TODO: need to disable this planet's passives here
 
         if (gameObject.tag == "Sun")
+        {
             owner.sunsLeft--;
+        }
+            
 
         owner = null;
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     //Is called every turn

@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
     public List<CelestialBody> MainDeck = new List<CelestialBody>();
     public List<CelestialBody> DiscardDeck = new List<CelestialBody>();
     public Grid Field;
-    public Grid Discard;
     public Grid Hand;
 
     public Vector2 FiringDirection = Vector2.up;
 
     private GameObject PrimaryDisplay = null;
+
+    public Vector3 DiscardArea = new Vector3(0, 1000, 0);
+    public Vector3 DeckArea = new Vector3(0, 2000, 0);
 
     private int _Dust = 0;
     public int Dust
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
         }
     }
     private int _BaseBuys = 1;
-    private int BaseBuys
+    public int BaseBuys
     {
         get { return _BaseBuys; }
         set
@@ -90,14 +92,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private int _sunsLeft = 3;
+    private int _sunsLeft = 1;
     public int sunsLeft
     {
         get { return _sunsLeft; }
         set
         {
             _sunsLeft = value;
-            if (sunsLeft <= 0)
+            print("suns left " + value);
+            if (_sunsLeft <= 0)
                 GameManager.Instance.WinGame(GameManager.Instance.OppositePlayer);
                 
         }
@@ -113,6 +116,13 @@ public class Player : MonoBehaviour
             throw new System.Exception("Please place Primary UI into the Main Canvas.");
     }
 
+    public void DiscardCard(CelestialBody card)
+    {
+        DiscardDeck.Add(card);
+        card.gameObject.transform.position = DiscardArea;
+        card.GetComponent<Collider>().enabled = false;
+    }
+
     /// <summary>
     /// Draw specified number of cards into your hand up until your card draw.
     /// Shuffle discard back into Main deck if neccesary
@@ -126,21 +136,28 @@ public class Player : MonoBehaviour
             {
                 RemakeDeck();
             }
-            if (MainDeck[0] is PlanetBody || MainDeck[0] is MeteorBody)
+            
+            if (MainDeck.Count != 0)
             {
-                DiscardDeck.Add(MainDeck[0]);
-                Discard.PopulateGrid(MainDeck[0]);
+                //Create copy to hand
                 CelestialBody Temp = Instantiate<CelestialBody>(MainDeck[0]);
+                Temp.gameObject.GetComponent<Collider>().enabled = true;
                 Hand.PopulateGrid(Temp);
+                CurrentHand.Add(Temp);
+
+                DiscardDeck.Add(MainDeck[0]);
+                MainDeck[0].GetComponent<Collider>().enabled = false;
+                MainDeck[0].transform.position = DiscardArea;
+
+                //Discard.PopulateGrid(MainDeck[0]);
+
+
+
                 MainDeck.RemoveAt(0);
+
+                drawnCards--;
             }
-            else
-            {
-                CurrentHand.Add(MainDeck[0]);
-                Hand.PopulateGrid(MainDeck[0]);
-                MainDeck.RemoveAt(0);
-            }
-            drawnCards--;
+
         }
 
         UpdateDecksizeUI();
@@ -156,6 +173,14 @@ public class Player : MonoBehaviour
 
         MainDeck = new List<CelestialBody>(DiscardDeck);
         DiscardDeck = new List<CelestialBody>();
+        foreach (CelestialBody main_card in MainDeck)
+        {
+            if (main_card != null)
+            {
+                main_card.gameObject.GetComponent<Collider>().enabled = false;
+                main_card.gameObject.transform.position = DeckArea;
+            }
+        }
         DeckShuffle(ref MainDeck);
 
         UpdateDecksizeUI();
@@ -168,7 +193,9 @@ public class Player : MonoBehaviour
     {
         foreach(CelestialBody x in CurrentHand)
         {
-            DiscardDeck.Add(x);
+            if (x != null && !x.isLocked)
+                Destroy(x.gameObject);
+            //DiscardDeck.Add(x);
         }
         CurrentHand.Clear();
 
@@ -190,10 +217,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetActive()
-    {
-
-    }
     public void ResetBuys()
     {
         Buys = BaseBuys;

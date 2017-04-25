@@ -24,7 +24,7 @@ public abstract class MeteorBody: DestroyableBody
             yield return null;
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
 
     }
 
@@ -49,8 +49,6 @@ public abstract class MeteorBody: DestroyableBody
         if (radius <= 1)
             return;
 
-        print("radius");
-
         Grid grid = currentSlot.mygrid;
         Vector2 curr_pos = currentSlot.Position;
 
@@ -67,7 +65,7 @@ public abstract class MeteorBody: DestroyableBody
             {
                 Vector2 checking = new Vector2(i, j);
                 //Debug.Log("checking " + i + " " + j);
-                if (grid.SlotList.ContainsKey(checking) && grid.SlotList[checking].Body != null)
+                if (checking != currentSlot.Position && grid.SlotList.ContainsKey(checking) && grid.SlotList[checking].Body != null)
                     grid.SlotList[checking].Body.OnHit(gameObject.GetComponent<Collider>(), this);
             }
         }

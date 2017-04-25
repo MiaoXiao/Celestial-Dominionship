@@ -18,13 +18,16 @@ public class CometBody : MeteorBody
 
     public override void OnHit(Collider collision, MeteorBody meteor_body)
     {
+        if (!isLocked)
+            return;
+
         print("COMET ON HIT");
 
         CometRef.piercing--;
         if (CometRef.piercing <= -1)
         {
             damageCelestWithinRadius();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
             
 
@@ -45,6 +48,23 @@ public class CometBody : MeteorBody
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+
+        //Debug.Log("Hit");
+        if (owner == null)
+        {
+            Buy();
+            return;
+        }
+
+        if (owner != GameManager.Instance.CurrentPlayer)
+            return;
+
+        if (owner.Dust < CometRef.playCost && !isLocked)
+        {
+            print(owner.Dust + " < " + CometRef.playCost);
+            return;
+        }
+
         base.OnPointerDown(eventData);
 
         if (eventData.button == PointerEventData.InputButton.Left && isLocked)
@@ -52,6 +72,18 @@ public class CometBody : MeteorBody
             Play();
         }
             
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+
+        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = true;
+            if (DragUtility.Instance.EndDrag(this.gameObject))
+                owner.Dust -= CometRef.playCost;
+        }
+
     }
 
     public override Celest GetCelest()

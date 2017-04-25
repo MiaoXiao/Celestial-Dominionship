@@ -14,34 +14,33 @@ public class InitGameState : GameState
         for(int x = 0; x < 3; x++)
         {
             //Switch to object pooler
-            //DustBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<DustBody>();
-            CelestialBody dust = GameObject.Instantiate<CelestialBody>(GameManager.Instance.tempDust);
+            CelestialBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<CelestialBody>();
+            //CelestialBody dust = GameObject.Instantiate<CelestialBody>(GameManager.Instance.tempDust);
             dust.owner = current_player;
-            current_player.MainDeck.Add(dust);
-            current_player.Discard.PopulateGrid(dust);
+            current_player.DiscardCard(dust);
         }
         for(int x = 0; x < 2; x++)
         {
-            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = current_player;
-            current_player.MainDeck.Add(meteor);
-            current_player.Discard.PopulateGrid(meteor);
+            //current_player.MainDeck.Add(meteor);
+            current_player.DiscardCard(meteor);
         }
         for (int x = 0; x < 3; x++)
         {
             //Switch to object pooler
-            CelestialBody dust = ObjectPoolerManager.Instance.GetPooler["Gold Dust"].RetrieveCopy().GetComponent<CelestialBody>();
+            CelestialBody dust = ObjectPoolerManager.Instance.GetPooler["Copper Dust"].RetrieveCopy().GetComponent<CelestialBody>();
             dust.owner = other_player;
-            other_player.MainDeck.Add(dust);
-            other_player.Discard.PopulateGrid(dust);
+            //other_player.MainDeck.Add(dust);
+            other_player.DiscardCard(dust);
         }
         for (int x = 0; x < 2; x++)
         {
             //Switch to object pooler
-            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Asteroid"].RetrieveCopy().GetComponent<CelestialBody>();
+            CelestialBody meteor = ObjectPoolerManager.Instance.GetPooler["Simple Comet"].RetrieveCopy().GetComponent<CelestialBody>();
             meteor.owner = other_player;
-            other_player.MainDeck.Add(meteor);
-            other_player.Discard.PopulateGrid(meteor);
+            //other_player.MainDeck.Add(meteor);
+            other_player.DiscardCard(meteor);
         }
         current_player.DeckShuffle(ref current_player.MainDeck);
         other_player.DeckShuffle(ref current_player.MainDeck);

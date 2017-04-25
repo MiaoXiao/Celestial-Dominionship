@@ -26,8 +26,12 @@ public class AsteroidBody : MeteorBody
         if (Fired)
             return;
 
+        
+
         if (!Mover.isActive)
         {
+            owner.Dust -= AsteroidRef.playCost;
+
             transform.position += new Vector3(0, 60f, 0);
             GetComponent<Collider>().enabled = true;
             Mover.StartMovement(AsteroidRef.projectileSpeed, Vector3.down);
@@ -36,25 +40,53 @@ public class AsteroidBody : MeteorBody
         }
     }
 
-    public override void OnPointerUp(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
-        {
-            DragUtility.Instance.EndDragForce(this.gameObject);
-            Play();
-        }
-    }
-
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        base.OnPointerDown(eventData);
+        //Debug.Log("Hit");
+        if (owner == null)
+        {
+            Buy();
+            return;
+        }
 
+        if (owner != GameManager.Instance.CurrentPlayer)
+            return;
+
+        if (owner.Dust < AsteroidRef.playCost)
+        {
+            return;
+        }
+
+        else if (eventData.button == PointerEventData.InputButton.Left && !isLocked)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+            DragUtility.Instance.StartDrag(this.gameObject);
+        }
+
+        /*
         if (eventData.button == PointerEventData.InputButton.Left && isLocked)
         {
             Play();
         }
-            
+          */  
+    }
+
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        if (owner == null)
+            return;
+
+        /*
+        if (owner.Dust < AsteroidRef.playCost)
+        {
+            return;
+        }
+        */
+        DragUtility.Instance.EndDragForce(gameObject);
+        Play();
+        
     }
 
     public override Celest GetCelest()
